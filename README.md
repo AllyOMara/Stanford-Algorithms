@@ -16,4 +16,4 @@ Solutions to programming assignments in the Stanford Algorithms Specialization c
 
 ## Sources
 [Coursera](https://www.coursera.org/specializations/algorithms)<br>
-[Alrogirhtms Illuminated](https://www.algorithmsilluminated.org/)<br>
+[Algorithms Illuminated](https://www.algorithmsilluminated.org/)<br>
