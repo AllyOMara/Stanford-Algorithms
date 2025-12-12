@@ -9,23 +9,11 @@ Because of the large size of this array, you should implement the fast
 divide-and-conquer algorithm covered in the video lectures.
 '''
 
-
-#################################################################################
-##########################      GLOBAL VARIABLES      ###########################
-#################################################################################
-
+import time
 
 inv_count   = 0
 input_array = []
-# len_left    = None
-# len_right   = None
-# merged      = []
-
-
-#################################################################################
-##############################      FUNCTIONS      ##############################
-#################################################################################
-
+start_time  = time.perf_counter()
 
 '''
 Count left and right inversions.
@@ -46,12 +34,14 @@ def merge_and_count(array):
         right = merge_and_count(right)
 
     merged = []
+    global inv_count
 
     while len(left) > 0 and len(right) > 0:
         if len(right) > 0 and len(left) > 0:
             if left[0] > right[0]:
                 merged.append(right[0])
                 right.pop(0)
+                inv_count = inv_count + 1
             elif left[0] < right[0]:
                 merged.append(left[0])
                 left.pop(0)
@@ -59,25 +49,26 @@ def merge_and_count(array):
     if len(right) > 0:
         merged.extend(right)
     elif len(left) > 0:
-        merged.extend(left)     # While the + operator can be used, since the length of the arrays are sufficiently large, .extend is used to save time
-    print(left, right)
-    print(merged)
+        merged.extend(left)
 
     return merged
 
-
 #################################################################################
-
 
 file_name_1 = "integerarray.txt"
 file_name_2 = "even.txt"
 file_name_3 = "odd.txt"
 
 # Read all lines in the file and place in an array
-with open(file_name_2) as file:
+with open(file_name_1) as file:
     for line in file:
         input_array.append(int(line))
-print(input_array)
+len_input = len(input_array)
 
-sorted_array = merge_and_count(input_array)
-print(sorted_array)
+sorted_array    = merge_and_count(input_array)
+end_time        = time.perf_counter()
+elapsed_time    = end_time - start_time
+
+print(f"The sorted array is: {sorted_array}.")
+print(f"The number of inverses present in the file is: {inv_count}.")
+print(f"The time it took to sort {len_input} items and count the number of inverses was: {elapsed_time} seconds.")
