@@ -17,7 +17,7 @@ start_time  = time.perf_counter()
 
 '''
 Count left and right inversions.
-Also sort the left and right halves (to achieve O(n*log(n))
+Also sort the left and right halves (to achieve O(nlogn))
 '''
 def merge_and_count(array):
 
@@ -37,14 +37,14 @@ def merge_and_count(array):
     global inv_count
 
     while len(left) > 0 and len(right) > 0:
-        if len(right) > 0 and len(left) > 0:
-            if left[0] > right[0]:
-                merged.append(right[0])
-                right.pop(0)
-                inv_count = inv_count + 1
-            elif left[0] < right[0]:
-                merged.append(left[0])
-                left.pop(0)
+        if left[0] > right[0]:
+            merged.append(right[0])
+            right.pop(0)
+            inv_count = inv_count + len(left) # UNSURE
+        elif left[0] < right[0]:
+            merged.append(left[0])
+            inv_count = inv_count + len(right)
+            left.pop(0)
 
     if len(right) > 0:
         merged.extend(right)
@@ -55,12 +55,13 @@ def merge_and_count(array):
 
 #################################################################################
 
-file_name_1 = "integerarray.txt"
-file_name_2 = "even.txt"
-file_name_3 = "odd.txt"
+file_name_1 = "integerarray.txt"    # Assigned file
+file_name_2 = "even.txt"            # File with an even number integers
+file_name_3 = "odd.txt"             # File with an odd number of integers
+file_name_4 = "36_inv.txt"          # File with 36 inverses
 
 # Read all lines in the file and place in an array
-with open(file_name_1) as file:
+with open(file_name_4) as file:
     for line in file:
         input_array.append(int(line))
 len_input = len(input_array)
