@@ -6,10 +6,15 @@ Solution by Alexandria O'Mara
 
 TASK
 
-This file (integerarray.txt) contains all of the 100,000 integers between
-1 and 100,000 (inclusive) in some order, with no integer repeated.
-Compute the number of inversions in the file given, where the ith row
-of the file indicates the ith entry of an array.
-Because of the large size of this array, you should implement the fast
-divide-and-conquer algorithm covered in the video lectures.
+This file (QuickSort.txt) contains all of the integers between
+1 and 10,000 (inclusive, with no repeats) in unsorted order.
+The integer in the ith row of the file gives you the ith entry
+of an input array.
+Compute the total number of comparisons used to sort the given
+input file by QuickSort. As you know, the number of comparisons
+depends on which elements are chosen as pivots, so we'll ask
+you to explore three different pivoting rules
+
+For the first part of the programming assignment, you should
+always use the first element of the array as the pivot element.
 '''
