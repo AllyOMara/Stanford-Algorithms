@@ -55,6 +55,7 @@ def quick_sort(array):
 ####################################################################
 
 file_name_1 = "QuickSort.txt"       # Assigned file
+file_name_2 = "1_to_10.txt"         # File with numbers 1 to 10 in a random order
 
 
 # Read data from file
