@@ -62,7 +62,7 @@ def quick_sort(array):
     middle_value  = array[middle_index]
     last_value    = array[last_index]
     
-    median_value = find_median(first_value, middle_value, last_value)
+    median_value  = find_median(first_value, middle_value, last_value)
 
     if median_value == first_value:
         pivot_index = first_index
@@ -72,9 +72,9 @@ def quick_sort(array):
         pivot_index = last_index
 
     # Partition
-    i           = 1   # Index where elements less than the pivot ends
+    i = 1   # Index where elements less than the pivot ends
     pivot_array = [array[pivot_index]]
-    array[pivot_index], array[0]  = array[0], array[pivot_index] # Swaps pivot element with the first element to mainatain consistency
+    array[pivot_index], array[0] = array[0], array[pivot_index] # Swaps pivot element with the first element to mainatain consistency
 
     global comparisons
     comparisons = comparisons + len_array - 1
@@ -85,10 +85,10 @@ def quick_sort(array):
             i = i + 1
     
     array[i - 1], array[0]  = array[0], array[i - 1] # "Puts" pivot in place
-    left                    = array[:i - 1]
-    right                   = array[i:]
 
     # Recursion
+    left    = array[:i - 1]
+    right   = array[i:]
     if len(left) > 1:
         left = quick_sort(left)
     if len(right) > 1:
@@ -120,4 +120,4 @@ elapsed_time = end_time - start_time
 
 print(f"The sorted array is: {sorted_array}.")
 print(f"The number of comparisons made was: {comparisons}.")
-print(f"The time it took to sort {len_input} items and count the number of inverses was: {elapsed_time} seconds.")
+print(f"The time it took to sort {len_input} items and count the number of comparisons was: {elapsed_time} seconds.")
