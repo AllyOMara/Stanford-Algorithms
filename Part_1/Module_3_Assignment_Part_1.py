@@ -36,14 +36,31 @@ Count number of comparisons
 def quick_sort(array):
     # Return if the length of the array is 1
     len_array = len(array)
-    if len_array == 1:
+    if len(array) == 1:
         return array
-
     # Partition A around P (i.e. get all <p to the right and all >p to the left)
-    
+    i       = 1   # index where elements less than the pivot ends
+    pivot = [array[0]]
+
+    for j in range(1, len_array):
+        if array[0] > array[j]:
+            array[i], array[j] = array[j], array[i]
+            i = i + 1
+    array[i - 1], array[0] = array[0], array[i - 1] # "Puts" pivot in place
+
+    left    = array[:i - 1]
+    right   = array[i:]
 
     # Recursively sort left and right
+    if len(left) > 1:
+        left = quick_sort(left)
+    if len(right) > 1:
+        right = quick_sort(right)
 
+    # Combine into final array
+    array = left + pivot + right
+    
+    return(array)
 
 
 
@@ -64,5 +81,7 @@ with open(file_name_1) as file:
     for line in file:
         input_array.append(int(line))
 len_input = len(input_array)
-print(input_array)
 
+output = quick_sort(input_array)
+
+print(output)
