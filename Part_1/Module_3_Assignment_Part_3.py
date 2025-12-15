@@ -10,6 +10,7 @@ This file (QuickSort.txt) contains all of the integers between
 1 and 10,000 (inclusive, with no repeats) in unsorted order.
 The integer in the ith row of the file gives you the ith entry
 of an input array.
+
 Compute the total number of comparisons used to sort the given
 input file by QuickSort. As you know, the number of comparisons
 depends on which elements are chosen as pivots, so we'll ask
@@ -35,7 +36,7 @@ Find the median value from a list of three values
 Returns the median value
 '''
 def find_median(first, middle, last):
-    """    
+    """ Finds and returns the median of three inputted values.
     :param first: Integer (first element of an array).
     :param middle: Integer (middle element of an array).
     :param last: Integer (last element of an array).
@@ -52,16 +53,11 @@ def find_median(first, middle, last):
     else:
         return last
 
-
-'''
-Quick Sort
-Count number of comparisons
-'''
 def quick_sort(array):
-    """
+    """ Sorts an inputted array and counts the total number of comparisons made between elements.
     :param array: Array containing integers and no duplicates in an arbitrary order.
     Returns:
-        Inputted array in ascending order.
+        Inputted array in ascending order, and number of comparisons made between elements.
     """   
 
     len_array = len(array)
@@ -123,7 +119,6 @@ file_name_2 = "1_to_10_random.txt"  # File with numbers 1 to 10 (inclusive) in a
 file_name_3 = "1_to_10_ordered.txt" # File with numbers 1 to 10 (inclusive) is ascending order
 file_name_4 = "integerarray.txt"    # File with numbers 1 to 100000 (inclusive) in a random order
 
-
 # Read data from file
 input_array = []
 with open(file_name_1) as file:
@@ -135,7 +130,6 @@ start_time = time.perf_counter()
 sorted_array = quick_sort(input_array)
 end_time = time.perf_counter()
 elapsed_time = end_time - start_time
-
 
 print(f"The sorted array is: {sorted_array}.")
 print(f"The number of comparisons made was: {comparisons}.")
