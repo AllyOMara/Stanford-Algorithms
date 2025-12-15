@@ -35,10 +35,12 @@ Count number of comparisons
 '''
 def quick_sort(array):
     # Return if the length of the array is 1
-    pass
+    len_array = len(array)
+    if len_array == 1:
+        return array
 
     # Partition A around P (i.e. get all <p to the right and all >p to the left)
-
+    
 
     # Recursively sort left and right
 
