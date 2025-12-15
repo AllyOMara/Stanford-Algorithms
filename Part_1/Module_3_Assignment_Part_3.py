@@ -35,6 +35,14 @@ Find the median value from a list of three values
 Returns the median value
 '''
 def find_median(first, middle, last):
+    """    
+    :param first: Integer (first element of an array).
+    :param middle: Integer (middle element of an array).
+    :param last: Integer (last element of an array).
+    Returns:
+        The median of the three inputted integers.
+    """
+  
     min_value = min(first, middle, last)
     max_value = max(first, middle, last)
     if first != min_value and first != max_value:
@@ -44,19 +52,28 @@ def find_median(first, middle, last):
     else:
         return last
 
+
 '''
 Quick Sort
 Count number of comparisons
 '''
 def quick_sort(array):
-    
+    """
+    :param array: Array containing integers and no duplicates in an arbitrary order.
+    Returns:
+        Inputted array in ascending order.
+    """   
+
     len_array = len(array)
     if len_array == 1:
         return array
     
     first_index   = 0
-    middle_index  = len_array // 2
     last_index    = len_array - 1
+    if len_array % 2 == 1:
+        middle_index = (len_array // 2)
+    else:
+        middle_index = (len_array // 2) - 1
 
     first_value   = array[first_index]
     middle_value  = array[middle_index]
@@ -74,7 +91,7 @@ def quick_sort(array):
     # Partition
     i = 1   # Index where elements less than the pivot ends
     pivot_array = [array[pivot_index]]
-    array[pivot_index], array[0] = array[0], array[pivot_index] # Swaps pivot element with the first element to mainatain consistency
+    array[pivot_index], array[0] = array[0], array[pivot_index] # Swaps pivot element with the first element
 
     global comparisons
     comparisons = comparisons + len_array - 1
@@ -84,7 +101,7 @@ def quick_sort(array):
             array[i], array[j] = array[j], array[i]
             i = i + 1
     
-    array[i - 1], array[0]  = array[0], array[i - 1] # "Puts" pivot in place
+    array[i - 1], array[0] = array[0], array[i - 1] # "Puts" pivot in place
 
     # Recursion
     left    = array[:i - 1]
@@ -102,8 +119,9 @@ def quick_sort(array):
 ########################### EXECUTE ################################
 
 file_name_1 = "QuickSort.txt"       # Assigned file
-file_name_2 = "1_to_10.txt"         # File with numbers 1 to 10 (inclusive) in a random order
-file_name_3 = "integerarray.txt"    # File with numbers 1 to 100000 (inclusive) in a random order
+file_name_2 = "1_to_10_random.txt"  # File with numbers 1 to 10 (inclusive) in a random order
+file_name_3 = "1_to_10_ordered.txt" # File with numbers 1 to 10 (inclusive) is ascending order
+file_name_4 = "integerarray.txt"    # File with numbers 1 to 100000 (inclusive) in a random order
 
 
 # Read data from file
@@ -117,6 +135,7 @@ start_time = time.perf_counter()
 sorted_array = quick_sort(input_array)
 end_time = time.perf_counter()
 elapsed_time = end_time - start_time
+
 
 print(f"The sorted array is: {sorted_array}.")
 print(f"The number of comparisons made was: {comparisons}.")
