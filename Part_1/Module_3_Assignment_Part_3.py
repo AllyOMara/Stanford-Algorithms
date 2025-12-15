@@ -57,8 +57,8 @@ def quick_sort(array):
     """ Sorts an inputted array and counts the total number of comparisons made between elements.
     :param array: Array containing integers and no duplicates in an arbitrary order.
     Returns:
-        Inputted array in ascending order, and number of comparisons made between elements.
-    """   
+        array in non-decreasing order.
+    """
 
     len_array = len(array)
     if len_array == 1:
@@ -121,7 +121,7 @@ file_name_4 = "integerarray.txt"    # File with numbers 1 to 100000 (inclusive) 
 
 # Read data from file
 input_array = []
-with open(file_name_1) as file:
+with open(file_name_4) as file:
     for line in file:
         input_array.append(int(line))
 len_input = len(input_array)
