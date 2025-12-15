@@ -18,3 +18,48 @@ you to explore three different pivoting rules
 For the first part of the programming assignment, you should
 always use the first element of the array as the pivot element.
 '''
+
+####################################################################
+########################## GLOBALS #################################
+####################################################################
+
+comparisons = 0     # Count of performed comparisons
+
+####################################################################
+########################## FUNCTIONS ###############################
+####################################################################
+
+'''
+Quick Sort
+Count number of comparisons
+'''
+def quick_sort(array):
+    # Return if the length of the array is 1
+    pass
+
+    # Partition A around P (i.e. get all <p to the right and all >p to the left)
+
+
+    # Recursively sort left and right
+
+
+
+
+
+
+
+####################################################################
+########################### EXECUTE ################################
+####################################################################
+
+file_name_1 = "QuickSort.txt"       # Assigned file
+
+
+# Read data from file
+input_array = []
+with open(file_name_1) as file:
+    for line in file:
+        input_array.append(int(line))
+len_input = len(input_array)
+print(input_array)
+
