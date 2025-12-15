@@ -19,6 +19,8 @@ For the first part of the programming assignment, you should
 always use the first element of the array as the pivot element.
 '''
 
+import time
+
 ########################## GLOBALS #################################
 
 comparisons = 0     # Count of performed comparisons
@@ -38,6 +40,8 @@ def quick_sort(array):
     # Partition
     i       = 1   # index where elements less than the pivot ends
     pivot   = [array[0]]
+    global comparisons
+    comparisons = comparisons + len_array - 1
 
     for j in range(1, len_array):
         if array[0] > array[j]:
@@ -62,7 +66,8 @@ def quick_sort(array):
 ########################### EXECUTE ################################
 
 file_name_1 = "QuickSort.txt"       # Assigned file
-file_name_2 = "1_to_10.txt"         # File with numbers 1 to 10 in a random order
+file_name_2 = "1_to_10.txt"         # File with numbers 1 to 10 (inclusive) in a random order
+file_name_3 = "integerarray.txt"    # File with numbers 1 to 100000 (inclusive) in a random order
 
 
 # Read data from file
@@ -72,6 +77,11 @@ with open(file_name_1) as file:
         input_array.append(int(line))
 len_input = len(input_array)
 
-output = quick_sort(input_array)
+start_time = time.perf_counter()
+sorted_array = quick_sort(input_array)
+end_time = time.perf_counter()
+elapsed_time = end_time - start_time
 
-print(output)
+print(f"The sorted array is: {sorted_array}.")
+print(f"The number of comparisons made was: {comparisons}.")
+print(f"The time it took to sort {len_input} items and count the number of inverses was: {elapsed_time} seconds.")
