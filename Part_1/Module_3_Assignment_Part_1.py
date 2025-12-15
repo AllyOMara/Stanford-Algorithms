@@ -34,11 +34,11 @@ Count number of comparisons
 def quick_sort(array):
     
     len_array = len(array)
-    if len(array) == 1:
+    if len_array == 1:
         return array
     
     # Partition
-    i       = 1   # index where elements less than the pivot ends
+    i       = 1   # Index where elements less than the pivot ends
     pivot   = [array[0]]
     global comparisons
     comparisons = comparisons + len_array - 1
