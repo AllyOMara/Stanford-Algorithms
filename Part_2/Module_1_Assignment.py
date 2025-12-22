@@ -21,7 +21,7 @@ SCCs in the given graph, in decreasing order of sizes,
 separated by commas (avoid any spaces). If your algorithm
 finds less than 5 SCCs, then write 0 for the remaining terms.
 
-NOTE: This program uses Kosaraju's Algorithm.
+NOTE: Uses Kosaraju's Algorithm.
 '''
 
 import time
@@ -32,9 +32,8 @@ SCCs = [0, 0, 0, 0, 0]     # List of the sizes of found SCCs
 
 ########################## FUNCTIONS ###############################
 
-'''
-Creates an adjacency list
-'''
+
+
 
 
 '''
@@ -50,3 +49,26 @@ Find SCC sizes
 '''
 
 
+
+
+file_name_1 = "SCC.txt"    # Assigned file
+
+# Read data from file to create an adjacency list (graph)
+graph       = [[] for _ in range(875715)] 
+graph_rev   = [[] for _ in range(875715)] 
+with open(file_name_1) as file:
+    for line in file:
+        edge = line.split()
+        start_index = int(edge[0])
+        end_value = int(edge[1])
+        graph[start_index].append(end_value)
+# Read data from file to create an adjacency list (graph, but in reverse order)
+with open(file_name_1) as file:
+    for line in file:
+        edge = line.split()
+        start_index = int(edge[1])
+        end_value = int(edge[0])
+        graph_rev[start_index].append(end_value)
+
+print(graph)
+print(graph_rev)
