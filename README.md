@@ -9,6 +9,7 @@ Solutions to programming assignments in the Stanford Algorithms Specialization c
 
 ## Notable Projects
 [Merge Sort](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_1/Module_2_Assignment.py)<br>
+[Optimised QuickSort](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_1/Module_3_Assignment_Part_3.py)<br>
 <br><br>
 
 ## Notes
