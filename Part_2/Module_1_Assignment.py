@@ -20,6 +20,8 @@ Output Format: You should output the sizes of the 5 largest
 SCCs in the given graph, in decreasing order of sizes,
 separated by commas (avoid any spaces). If your algorithm
 finds less than 5 SCCs, then write 0 for the remaining terms.
+
+NOTE: This program uses Kosaraju's Algorithm.
 '''
 
 import time
@@ -29,3 +31,22 @@ import time
 SCCs = [0, 0, 0, 0, 0]     # List of the sizes of found SCCs
 
 ########################## FUNCTIONS ###############################
+
+'''
+Creates an adjacency list
+'''
+
+
+'''
+Compute finishing times for each node
+Uses Grev (Graph with reversed edges)
+'''
+
+
+'''
+DFS on highest to lowest finishing times
+Identify SCCs
+Find SCC sizes
+'''
+
+
