@@ -26,11 +26,10 @@ NOTE: Uses Kosaraju's Algorithm.
 
 import time
 
-finishing_times = [0 for _ in range(875715)]        # Tracks finish times
-visited_nodes   = [False for _ in range(875715)]    # Tracks which nodes have been visited
-leader_node     = None                              # Allows assignment of leader node to other nodes
 finish_time     = 0                                 # Incremented to update finishing_times
 scc_sizes       = []                                # List of scc sizes
+file_name_1     = "SCC.txt"                         # Assigned file
+MAX_RANGE       = 875714
 
 def reverse_dfs(reversed_graph, given_node):
     
@@ -42,18 +41,17 @@ def reverse_dfs(reversed_graph, given_node):
     global visited_nodes
     global finish_time
     global finishing_times
-    # 1. Check if the node has been explored
-    if visited_nodes[given_node] == False:
-        # 1. Mark given_node as explored
-        visited_nodes[given_node] = True
-        # 2. For each node adjacent to the given node, recurse
-        if len(reversed_graph[given_node]) != 0:
-            for end_node in len(reversed_graph[given_node]):
-                reverse_dfs(end_node)
-        # 3. Increment the finishing time
-        finish_time = finish_time + 1
-        # 4. Set global finishing time of given_node to the finishing time
-        finishing_times[given_node] = finish_time
+    # 1. Mark given_node as explored
+    visited_nodes[given_node] = True
+    # 2. For each node adjacent to the given node, recurse
+    if len(reversed_graph[given_node]) > 0:
+        for end_node in range(len(reversed_graph[given_node])):
+            if visited_nodes[end_node] == False:
+                reverse_dfs(reversed_graph, end_node)
+    # 3. Increment the finishing time
+    finish_time = finish_time + 1
+    # 4. Set global finishing time of given_node to the finishing time
+    finishing_times[given_node] = finish_time
 
 
 def find_sccs(graph, given_node):
@@ -62,18 +60,17 @@ def find_sccs(graph, given_node):
     :param graph: Adjacency list (the given graph).
     :param given_node: Integer (represents the given node).
     """
-
-    # 1. Reset visited nodes list
-    
-    # 2. Identify index of largest element in finishing times list
-
-    # 3. Based on that element, dfs to find SCC
-
-    # 4. Set the leader of given_node to the global leader_node
-
-    # 5. Calculate size of SCC, add to list of SCC sizes
-    
-    pass
+    global visited_nodes
+    global scc_sizes
+    scc_size = 0
+    # 1. Set given_node to visited
+    visited_nodes[given_node] = True
+    # 2. Based on given_node, dfs to find SCC
+    for end_node in len(graph[given_node]):
+        find_sccs(graph, end_node)
+        scc_size = scc_size + 1
+    # 3. Add scc_size to list of SCC sizes
+    scc_sizes.append(scc_size)
 
 
 def find_median(first, middle, last):
@@ -151,11 +148,11 @@ def quick_sort(array):
     return(array)
 
 
-def create_adj_list(size):
+def create_list(size):
     
-    """ Create adjacency list of length size + 1 (allows for easier indexing).
-    :param size: Integer (determines adjacency list size).
-    :return: List of length size + 1 (where all lists are distinct)
+    """ Create list of length size + 1 (allows for easier indexing).
+    :param size: Integer (adjacency list size).
+    :return: List of length size + 1. All indexes contain the given element.
     """
     
     return_list = [[]]
@@ -164,14 +161,13 @@ def create_adj_list(size):
     return return_list
     
 
-def create_graphs(file_name):
+def create_graph(file_name):
     
-    """ Create two adjacency lists to represent graphs - one in directed order, one in reversed order.
-    :param file_name: String (determines which file will be used to create adjacency lists)
+    """ Create adjacency list to represent graph.
+    :param file_name: String (determines which file will be used to create adjacency lists).
     """
 
-    graph       = create_adj_list(875715)
-    graph_rev   = create_adj_list(875715)
+    graph       = create_list(MAX_RANGE)
 
     with open(file_name) as file:
         for line in file:
@@ -180,6 +176,17 @@ def create_graphs(file_name):
             end_value = int(edge[1])
             graph[start_index].append(end_value)
 
+    return graph
+
+
+def create_graph_rev(file_name):
+    
+    """ Create adjacency list to represent graph with reversed edges.
+    :param file_name: String (determines which file will be used to create adjacency lists).
+    """
+    
+    graph_rev   = create_list(MAX_RANGE)
+
     with open(file_name) as file:
         for line in file:
             edge = line.split()
@@ -187,30 +194,34 @@ def create_graphs(file_name):
             end_value = int(edge[0])
             graph_rev[start_index].append(end_value)
 
-    return graph, graph_rev
+    return graph_rev
 
 
 def main():
+    global visited_nodes
+    finishing_times = create_list(MAX_RANGE, 0)                                     # FIX
+    visited_nodes = create_list(MAX_RANGE, False)                                   # FIX
+    graph, graph_rev = create_graph(file_name_1), create_graph_rev(file_name_1)
 
-    MAX_RANGE = 875715
-    file_name_1 = "SCC.txt"    # Assigned file
-
-    graph, graph_rev = create_graphs(file_name_1)
-
-    # First loop (on the reverse graph). Gets finishing times.
-    for node in range(MAX_RANGE - 1, 0, -1):
+    # First loop (on the reverse graph). Gets finishing times
+    for node in range(MAX_RANGE, 0, -1):
         if visited_nodes[node] == False:
             reverse_dfs(graph_rev, node)
 
-    print(finishing_times)
-
     # Reset visited nodes list
-
-    # Find all the SCCs list
-
+    visited_nodes = []
+    
+    # Second loop (on graph). Finds SCCs
+    for finished_time in range(1, MAX_RANGE):
+        node = finishing_times.index(finished_time)
+        if visited_nodes[node] == False:
+            leader_node = node
+            find_sccs(graph, node)
     # Sort the list of SCCs
-
+    quick_sort(scc_sizes)
     # Get 5 largest SCCs in a separate list (final answer)
+    largest_sccs = scc_sizes[0:5]
+    print(largest_sccs)
 
 
 if __name__ == "__main__":
@@ -220,7 +231,7 @@ if __name__ == "__main__":
 '''
 TO DO
 
-x. Add function for reading data from file.
+x. Finish main()
 x. main() function should not do any work (eventually).
 
 ---
