@@ -26,81 +26,65 @@ NOTE: Uses Kosaraju's Algorithm.
 
 import time
 
-########################## GLOBALS #################################
+finishing_times = [0 for _ in range(875715)]        # Tracks finish times
+visited_nodes   = [False for _ in range(875715)]    # Tracks which nodes have been visited
+leader_node     = None                              # Allows assignment of leader node to other nodes
+finish_time     = 0                                 # Incremented to update finishing_times
+scc_sizes       = []                                # List of scc sizes
 
-finishing_times = [0 for _ in range(875715)]    # Tracks finish times
-leader_node = None                              # Allows assignment of leader node to other nodes
-finish_time = 0                                 # Incremented to update finishing_times
-scc_sizes   = []                                # List of scc sizes
-
-########################## FUNCTIONS ###############################
-
-
-'''
-Compute finishing times for each node
-Uses graph with reversed edges and DFS
-'''
 def reverse_dfs(reversed_graph, given_node):
-    """ Compute finishing times for each node.
+    
+    """ Compute finishing times for each node by using DFS on the reversed graph.
     :param reversed_graph: Adjacency list (the given graph, but with reversed edges).
     :param given_node: Integer (represents the node which has been recursed on).
-    Returns:
-        The median of the three inputted integers.
     """
+
+    global visited_nodes
+    global finish_time
+    global finishing_times
+    # 1. Check if the node has been explored
+    if visited_nodes[given_node] == False:
+        # 1. Mark given_node as explored
+        visited_nodes[given_node] = True
+        # 2. For each node adjacent to the given node, recurse
+        if len(reversed_graph[given_node]) != 0:
+            for end_node in len(reversed_graph[given_node]):
+                reverse_dfs(end_node)
+        # 3. Increment the finishing time
+        finish_time = finish_time + 1
+        # 4. Set global finishing time of given_node to the finishing time
+        finishing_times[given_node] = finish_time
+
+
+def find_sccs(graph, given_node):
     
-    
-    # Locals
-
-    # 1. Mark given_node as explored
-
-    # 2. Set the leader of given_node to the global leader_node
-
-    # 3. For each element in the adjacency list created, recurse
-
-    # 4. Increment the finishing time
-
-    # 5. Set global finishing time of given_node to the finishing time
-
-    pass
-
-
-
-'''
-DFS on highest to lowest finishing times
-Identify SCCs
-Find SCC sizes
-'''
-def find_sccs(graph):
     """ Finds SCCs and their size using DFS on highest to lowest finishing times.
     :param graph: Adjacency list (the given graph).
+    :param given_node: Integer (represents the given node).
     """
 
     # 1. Reset visited nodes list
     
-    # 1. Identify index of largest element in finishing times list
+    # 2. Identify index of largest element in finishing times list
 
-    # 2. Based on that element, dfs to find SCC
+    # 3. Based on that element, dfs to find SCC
 
-    # 3. Calculate size of SCC, add to list of SCC sizes
+    # 4. Set the leader of given_node to the global leader_node
+
+    # 5. Calculate size of SCC, add to list of SCC sizes
     
     pass
 
 
-'''
-Find the median value from a list of three values
-Returns the median value
-'''
 def find_median(first, middle, last):
-    """ Finds and returns the median of three inputted values.
-    :param first: Integer (first element of an array).
-    :param middle: Integer (middle element of an array).
-    :param last: Integer (last element of an array).
-    Returns:
-        The median of the three inputted integers.
+    
+    """ 
+    Find and return the median of first, middle, last.
     """
   
     min_value = min(first, middle, last)
     max_value = max(first, middle, last)
+
     if first != min_value and first != max_value:
         return first
     elif middle != min_value and middle != max_value:
@@ -108,11 +92,13 @@ def find_median(first, middle, last):
     else:
         return last
 
+
 def quick_sort(array):
-    """ Sorts an inputted array and counts the total number of comparisons made between elements.
+    
+    """ Sort array.
     :param array: Array containing integers and no duplicates in an arbitrary order.
     Returns:
-        array in non-decreasing order.
+        Array in non-decreasing order.
     """
 
     len_array = len(array)
@@ -144,9 +130,6 @@ def quick_sort(array):
     pivot_array = [array[pivot_index]]
     array[pivot_index], array[0] = array[0], array[pivot_index] # Swaps pivot element with the first element
 
-    global comparisons
-    comparisons = comparisons + len_array - 1
-
     for j in range(1, len_array):
         if array[0] > array[j]:
             array[i], array[j] = array[j], array[i]
@@ -168,37 +151,82 @@ def quick_sort(array):
     return(array)
 
 
+def create_adj_list(size):
+    
+    """ Create adjacency list of length size + 1 (allows for easier indexing).
+    :param size: Integer (determines adjacency list size).
+    :return: List of length size + 1 (where all lists are distinct)
+    """
+    
+    return_list = [[]]
+    for i in range(size):
+        return_list.append([])
+    return return_list
+    
 
-########################### EXECUTE ################################
+def create_graphs(file_name):
+    
+    """ Create two adjacency lists to represent graphs - one in directed order, one in reversed order.
+    :param file_name: String (determines which file will be used to create adjacency lists)
+    """
+
+    graph       = create_adj_list(875715)
+    graph_rev   = create_adj_list(875715)
+
+    with open(file_name) as file:
+        for line in file:
+            edge = line.split()
+            start_index = int(edge[0])
+            end_value = int(edge[1])
+            graph[start_index].append(end_value)
+
+    with open(file_name) as file:
+        for line in file:
+            edge = line.split()
+            start_index = int(edge[1])
+            end_value = int(edge[0])
+            graph_rev[start_index].append(end_value)
+
+    return graph, graph_rev
 
 
-file_name_1 = "SCC.txt"    # Assigned file
+def main():
 
-# Read data from file to create an adjacency list (graph)
-graph       = [[] for _ in range(875715)] 
-graph_rev   = [[] for _ in range(875715)] 
-with open(file_name_1) as file:
-    for line in file:
-        edge = line.split()
-        start_index = int(edge[0])
-        end_value = int(edge[1])
-        graph[start_index].append(end_value)
-# Read data from file to create an adjacency list (graph, but in reverse order)
-with open(file_name_1) as file:
-    for line in file:
-        edge = line.split()
-        start_index = int(edge[1])
-        end_value = int(edge[0])
-        graph_rev[start_index].append(end_value)
+    MAX_RANGE = 875715
+    file_name_1 = "SCC.txt"    # Assigned file
 
+    graph, graph_rev = create_graphs(file_name_1)
 
-# 1. Begin loop from 875715 to 1, decreasing
+    # First loop (on the reverse graph). Gets finishing times.
+    for node in range(MAX_RANGE - 1, 0, -1):
+        if visited_nodes[node] == False:
+            reverse_dfs(graph_rev, node)
 
-    # 2. Check if the node is visited
+    print(finishing_times)
 
-    # 3. If not visited, dfs on that node
+    # Reset visited nodes list
+
+    # Find all the SCCs list
+
+    # Sort the list of SCCs
+
+    # Get 5 largest SCCs in a separate list (final answer)
 
 
+if __name__ == "__main__":
+    main()
 
-print(graph)
-print(graph_rev)
+
+'''
+TO DO
+
+x. Add function for reading data from file.
+x. main() function should not do any work (eventually).
+
+---
+
+DONE
+
+
+
+'''
