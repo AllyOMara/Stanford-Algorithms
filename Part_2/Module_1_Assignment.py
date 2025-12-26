@@ -31,47 +31,6 @@ scc_sizes       = []                                # List of scc sizes
 file_name_1     = "SCC.txt"                         # Assigned file
 MAX_RANGE       = 875714
 
-def reverse_dfs(reversed_graph, given_node):
-    
-    """ Compute finishing times for each node by using DFS on the reversed graph.
-    :param reversed_graph: Adjacency list (the given graph, but with reversed edges).
-    :param given_node: Integer (represents the node which has been recursed on).
-    """
-
-    global visited_nodes
-    global finish_time
-    global finishing_times
-    # 1. Mark given_node as explored
-    visited_nodes[given_node] = True
-    # 2. For each node adjacent to the given node, recurse
-    if len(reversed_graph[given_node]) > 0:
-        for end_node in range(len(reversed_graph[given_node])):
-            if visited_nodes[end_node] == False:
-                reverse_dfs(reversed_graph, end_node)
-    # 3. Increment the finishing time
-    finish_time = finish_time + 1
-    # 4. Set global finishing time of given_node to the finishing time
-    finishing_times[given_node] = finish_time
-
-
-def find_sccs(graph, given_node):
-    
-    """ Finds SCCs and their size using DFS on highest to lowest finishing times.
-    :param graph: Adjacency list (the given graph).
-    :param given_node: Integer (represents the given node).
-    """
-    global visited_nodes
-    global scc_sizes
-    scc_size = 0
-    # 1. Set given_node to visited
-    visited_nodes[given_node] = True
-    # 2. Based on given_node, dfs to find SCC
-    for end_node in len(graph[given_node]):
-        find_sccs(graph, end_node)
-        scc_size = scc_size + 1
-    # 3. Add scc_size to list of SCC sizes
-    scc_sizes.append(scc_size)
-
 
 def find_median(first, middle, last):
     
@@ -148,11 +107,11 @@ def quick_sort(array):
     return(array)
 
 
-def create_list(size):
+def create_adj_list(size):
     
     """ Create list of length size + 1 (allows for easier indexing).
     :param size: Integer (adjacency list size).
-    :return: List of length size + 1. All indexes contain the given element.
+    :return: List of length size + 1. All indexes contain an empty list.
     """
     
     return_list = [[]]
@@ -167,7 +126,7 @@ def create_graph(file_name):
     :param file_name: String (determines which file will be used to create adjacency lists).
     """
 
-    graph       = create_list(MAX_RANGE)
+    graph       = create_adj_list(MAX_RANGE)
 
     with open(file_name) as file:
         for line in file:
@@ -185,7 +144,7 @@ def create_graph_rev(file_name):
     :param file_name: String (determines which file will be used to create adjacency lists).
     """
     
-    graph_rev   = create_list(MAX_RANGE)
+    graph_rev   = create_adj_list(MAX_RANGE)
 
     with open(file_name) as file:
         for line in file:
@@ -197,31 +156,106 @@ def create_graph_rev(file_name):
     return graph_rev
 
 
+def create_fin_time_list(size):
+    """ Create list of length size + 1 (allows for easier indexing).
+    :param size: Integer (adjacency list size).
+    :return: List of length size + 1. All indexes contain integer 0.
+    """
+    
+    return_list = [0]
+    for i in range(size):
+        return_list.append(0)
+    return return_list    
+
+
+def create_visited_nodes_list(size):
+    """ Create list of length size + 1 (allows for easier indexing).
+    :param size: Integer (adjacency list size).
+    :return: List of length size + 1. All indexes contain "False.
+    """
+    
+    return_list = [False]
+    for i in range(size):
+        return_list.append(False)
+    return return_list   
+
+
+def reverse_dfs(reversed_graph, given_node, visited_nodes, finishing_times):
+    
+    """ Compute finishing times for each node by using DFS on the reversed graph.
+    :param reversed_graph: Adjacency list (the given graph, but with reversed edges).
+    :param given_node: Integer (represents the node which has been recursed on).
+    """
+
+    global finish_time
+    # 1. Mark given_node as explored
+    visited_nodes[given_node] = True
+    # 2. For each node adjacent to the given node, recurse
+    end_nodes = reversed_graph[given_node]
+    if len(end_nodes) > 0:
+        end_nodes = reversed_graph[given_node]
+        for i in range(len(end_nodes)):
+            end_node = end_nodes[i]
+            if visited_nodes[end_node] == False:
+                reverse_dfs(reversed_graph, end_node, visited_nodes, finishing_times)
+    # 3. Increment the finishing time
+    finish_time = finish_time + 1
+    # 4. Set global finishing time of given_node to the finishing time
+    finishing_times[given_node] = finish_time
+
+
+def find_sccs(graph, given_node, visited_nodes):
+    
+    """ Finds SCCs and their size using DFS on highest to lowest finishing times.
+    :param graph: Adjacency list (the given graph).
+    :param given_node: Integer (represents the given node).
+    """
+    global scc_sizes
+    scc_size = 0
+    # 1. Check if the nodes has been visited
+    if visited_nodes[given_node] == True:
+        pass
+    else:
+        visited_nodes[given_node] = True
+        end_nodes = graph[given_node]
+        # 2. Based on given_node, dfs to find SCC
+        for i in range(len(end_nodes)):
+            end_node = end_nodes[i]
+            find_sccs(graph, end_node, visited_nodes)
+            scc_size = scc_size + 1
+        # 3. Add scc_size to list of SCC sizes
+        scc_sizes.append(scc_size)
+
+
 def main():
-    global visited_nodes
-    finishing_times = create_list(MAX_RANGE, 0)                                     # FIX
-    visited_nodes = create_list(MAX_RANGE, False)                                   # FIX
+
+    start_time = time.perf_counter()
+    finishing_times = create_fin_time_list(MAX_RANGE)
+    visited_nodes = create_visited_nodes_list(MAX_RANGE)
     graph, graph_rev = create_graph(file_name_1), create_graph_rev(file_name_1)
 
     # First loop (on the reverse graph). Gets finishing times
     for node in range(MAX_RANGE, 0, -1):
         if visited_nodes[node] == False:
-            reverse_dfs(graph_rev, node)
+            reverse_dfs(graph_rev, node, visited_nodes, finishing_times)
 
     # Reset visited nodes list
-    visited_nodes = []
+    visited_nodes = create_visited_nodes_list(MAX_RANGE)
     
     # Second loop (on graph). Finds SCCs
     for finished_time in range(1, MAX_RANGE):
         node = finishing_times.index(finished_time)
         if visited_nodes[node] == False:
-            leader_node = node
-            find_sccs(graph, node)
+            find_sccs(graph, node, visited_nodes)
     # Sort the list of SCCs
     quick_sort(scc_sizes)
     # Get 5 largest SCCs in a separate list (final answer)
     largest_sccs = scc_sizes[0:5]
-    print(largest_sccs)
+    end_time = time.perf_counter()
+    elapsed_time = end_time - start_time
+    print(f"All SCC sizes were: {scc_sizes}")
+    print(f"The five largest SCCs are: {largest_sccs}.")
+    print(f"The time taken for these SCCs to be calculated was: {elapsed_time} seconds.")
 
 
 if __name__ == "__main__":
@@ -231,7 +265,8 @@ if __name__ == "__main__":
 '''
 TO DO
 
-x. Finish main()
+x. Finish main().
+x. Fix finishing_times and visited_nodes lists.
 x. main() function should not do any work (eventually).
 
 ---
