@@ -24,12 +24,19 @@ finds less than 5 SCCs, then write 0 for the remaining terms.
 NOTE: Uses Kosaraju's Algorithm.
 '''
 
-import time
 
-finish_time     = 0                                 # Incremented to update finishing_times
-scc_sizes       = []                                # List of scc sizes
-file_name_1     = "SCC.txt"                         # Assigned file
-MAX_RANGE       = 875714
+import time
+import sys
+
+sys.setrecursionlimit(100000)
+finish_time     = 0                     # Incremented to update finishing_times
+scc_sizes       = []                    # List of scc sizes
+file_name_1     = "SCC.txt"             # Assigned file
+file_name_2     = "small_graph_01.txt"  # File with a small graph
+file_name_3     = "small_graph_02.txt"  # File with a small, known graph
+current_file    = file_name_1           # Easily change which file is being used
+scc_size        = 0                     # Tracks sizes of sccs
+MAX_RANGE       = 875714                # Largest node number
 
 
 def find_median(first, middle, last):
@@ -126,7 +133,7 @@ def create_graph(file_name):
     :param file_name: String (determines which file will be used to create adjacency lists).
     """
 
-    graph       = create_adj_list(MAX_RANGE)
+    graph = create_adj_list(MAX_RANGE)
 
     with open(file_name) as file:
         for line in file:
@@ -144,7 +151,7 @@ def create_graph_rev(file_name):
     :param file_name: String (determines which file will be used to create adjacency lists).
     """
     
-    graph_rev   = create_adj_list(MAX_RANGE)
+    graph_rev = create_adj_list(MAX_RANGE)
 
     with open(file_name) as file:
         for line in file:
@@ -193,7 +200,6 @@ def reverse_dfs(reversed_graph, given_node, visited_nodes, finishing_times):
     # 2. For each node adjacent to the given node, recurse
     end_nodes = reversed_graph[given_node]
     if len(end_nodes) > 0:
-        end_nodes = reversed_graph[given_node]
         for i in range(len(end_nodes)):
             end_node = end_nodes[i]
             if visited_nodes[end_node] == False:
@@ -210,29 +216,28 @@ def find_sccs(graph, given_node, visited_nodes):
     :param graph: Adjacency list (the given graph).
     :param given_node: Integer (represents the given node).
     """
-    global scc_sizes
-    scc_size = 0
-    # 1. Check if the nodes has been visited
-    if visited_nodes[given_node] == True:
-        pass
-    else:
-        visited_nodes[given_node] = True
-        end_nodes = graph[given_node]
-        # 2. Based on given_node, dfs to find SCC
-        for i in range(len(end_nodes)):
-            end_node = end_nodes[i]
+
+    global scc_size
+    
+    # 1. Mark current node as visited
+    visited_nodes[given_node] = True
+    end_nodes = graph[given_node]
+    # 2. Based on given_node, dfs to find SCC
+    for i in range(len(end_nodes)):
+        end_node = end_nodes[i]
+        if visited_nodes[end_node] == False:
             find_sccs(graph, end_node, visited_nodes)
+            # 3. Update scc_size
             scc_size = scc_size + 1
-        # 3. Add scc_size to list of SCC sizes
-        scc_sizes.append(scc_size)
 
 
 def main():
 
+    global scc_size
     start_time = time.perf_counter()
     finishing_times = create_fin_time_list(MAX_RANGE)
     visited_nodes = create_visited_nodes_list(MAX_RANGE)
-    graph, graph_rev = create_graph(file_name_1), create_graph_rev(file_name_1)
+    graph, graph_rev = create_graph(current_file), create_graph_rev(current_file)
 
     # First loop (on the reverse graph). Gets finishing times
     for node in range(MAX_RANGE, 0, -1):
@@ -243,14 +248,16 @@ def main():
     visited_nodes = create_visited_nodes_list(MAX_RANGE)
     
     # Second loop (on graph). Finds SCCs
-    for finished_time in range(1, MAX_RANGE):
+    for finished_time in range(MAX_RANGE, 0, -1):
         node = finishing_times.index(finished_time)
         if visited_nodes[node] == False:
+            scc_size = 1
             find_sccs(graph, node, visited_nodes)
+            scc_sizes.append(scc_size)
     # Sort the list of SCCs
-    quick_sort(scc_sizes)
+    sorted_sizes = quick_sort(scc_sizes)
     # Get 5 largest SCCs in a separate list (final answer)
-    largest_sccs = scc_sizes[0:5]
+    largest_sccs = sorted_sizes[-5:]
     end_time = time.perf_counter()
     elapsed_time = end_time - start_time
     print(f"All SCC sizes were: {scc_sizes}")
