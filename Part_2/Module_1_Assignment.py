@@ -30,12 +30,11 @@ import sys
 
 sys.setrecursionlimit(100000)
 finish_time     = 0                     # Incremented to update finishing_times
-scc_sizes       = []                    # List of scc sizes
 file_name_1     = "SCC.txt"             # Assigned file
 file_name_2     = "small_graph_01.txt"  # File with a small graph
 file_name_3     = "small_graph_02.txt"  # File with a small, known graph
 current_file    = file_name_1           # Easily change which file is being used
-scc_size        = 0                     # Tracks sizes of sccs
+leader          = 0                     # Tracks leader node
 MAX_RANGE       = 875714                # Largest node number
 
 
@@ -163,7 +162,7 @@ def create_graph_rev(file_name):
     return graph_rev
 
 
-def create_fin_time_list(size):
+def create_zeros_list(size):
     """ Create list of length size + 1 (allows for easier indexing).
     :param size: Integer (adjacency list size).
     :return: List of length size + 1. All indexes contain integer 0.
@@ -210,14 +209,13 @@ def reverse_dfs(reversed_graph, given_node, visited_nodes, finishing_times):
     finishing_times[given_node] = finish_time
 
 
-def find_sccs(graph, given_node, visited_nodes):
+def find_sccs(graph, given_node, visited_nodes, leaders, leader):
     
     """ Finds SCCs and their size using DFS on highest to lowest finishing times.
     :param graph: Adjacency list (the given graph).
     :param given_node: Integer (represents the given node).
     """
 
-    global scc_size
     
     # 1. Mark current node as visited
     visited_nodes[given_node] = True
@@ -226,17 +224,18 @@ def find_sccs(graph, given_node, visited_nodes):
     for i in range(len(end_nodes)):
         end_node = end_nodes[i]
         if visited_nodes[end_node] == False:
-            find_sccs(graph, end_node, visited_nodes)
-            # 3. Update scc_size
-            scc_size = scc_size + 1
+            find_sccs(graph, end_node, visited_nodes, leaders, leader)
+    leaders[given_node] = leader
 
 
 def main():
 
-    global scc_size
+    global leader
+    
     start_time = time.perf_counter()
-    finishing_times = create_fin_time_list(MAX_RANGE)
+    finishing_times = create_zeros_list(MAX_RANGE)
     visited_nodes = create_visited_nodes_list(MAX_RANGE)
+    leaders = create_zeros_list(MAX_RANGE)
     graph, graph_rev = create_graph(current_file), create_graph_rev(current_file)
 
     # First loop (on the reverse graph). Gets finishing times
@@ -251,17 +250,17 @@ def main():
     for finished_time in range(MAX_RANGE, 0, -1):
         node = finishing_times.index(finished_time)
         if visited_nodes[node] == False:
-            scc_size = 1
-            find_sccs(graph, node, visited_nodes)
-            scc_sizes.append(scc_size)
-    # Sort the list of SCCs
-    sorted_sizes = quick_sort(scc_sizes)
+            leader = node
+            find_sccs(graph, node, visited_nodes, leaders, leader)
+
+    # Get the count of each leader node to find size of each SCC.
+
     # Get 5 largest SCCs in a separate list (final answer)
-    largest_sccs = sorted_sizes[-5:]
+    # largest_sccs = sorted_sizes[-5:]
     end_time = time.perf_counter()
     elapsed_time = end_time - start_time
-    print(f"All SCC sizes were: {scc_sizes}")
-    print(f"The five largest SCCs are: {largest_sccs}.")
+    print(f"All SCC sizes were: .")          # FIX
+    print(f"The five largest SCCs are: .")    # FIX
     print(f"The time taken for these SCCs to be calculated was: {elapsed_time} seconds.")
 
 
