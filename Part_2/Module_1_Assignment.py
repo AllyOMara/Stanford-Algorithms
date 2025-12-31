@@ -277,8 +277,8 @@ def main():
     # Get 5 largest SCCs in a separate list (final answer)
     end_time = time.perf_counter()
     elapsed_time = end_time - start_time
-    print(f"All SCC sizes were: {sorted_sccs}.")            # FIX
-    print(f"The five largest SCCs are: {largest_sccs}.")    # FIX
+    print(f"All SCC sizes were: {sorted_sccs}.")
+    print(f"The five largest SCCs are: {largest_sccs}.")
     print(f"The time taken for these SCCs to be calculated was: {elapsed_time} seconds.")
 
 
