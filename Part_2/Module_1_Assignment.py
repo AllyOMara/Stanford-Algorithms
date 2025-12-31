@@ -189,8 +189,10 @@ def create_visited_nodes_list(size):
 def reverse_dfs(reversed_graph, given_node, visited_nodes, finishing_times):
     
     """ Compute finishing times for each node by using DFS on the reversed graph.
-    :param reversed_graph: Adjacency list (the given graph, but with reversed edges).
+    :param reversed_graph: Adjacency list (given graph with reversed edges).
     :param given_node: Integer (represents the node which has been recursed on).
+    :param visited_nodes: List
+    :param finishing_times: List
     """
 
     global finish_time
@@ -214,6 +216,9 @@ def find_sccs(graph, given_node, visited_nodes, leaders, leader):
     """ Finds SCCs and their size using DFS on highest to lowest finishing times.
     :param graph: Adjacency list (the given graph).
     :param given_node: Integer (represents the given node).
+    :param visited_nodes: List.
+    :param leaders: List (tracks leader of each node).
+    :param leader: Integer (leader node).
     """
 
     
@@ -225,6 +230,8 @@ def find_sccs(graph, given_node, visited_nodes, leaders, leader):
         end_node = end_nodes[i]
         if visited_nodes[end_node] == False:
             find_sccs(graph, end_node, visited_nodes, leaders, leader)
+    
+    # Set leader of given_node to the given leader
     leaders[given_node] = leader
 
 
@@ -254,13 +261,24 @@ def main():
             find_sccs(graph, node, visited_nodes, leaders, leader)
 
     # Get the count of each leader node to find size of each SCC.
+    scc_sizes = []
+    for i in range(MAX_RANGE):
+        scc_size = 0
+        while i in leaders:
+            node = leaders.index(i)
+            leaders.pop(node)
+            scc_size = scc_size + 1
+        if scc_size > 0:
+            scc_sizes.append(scc_size)
+    
+    sorted_sccs = quick_sort(scc_sizes)
+    largest_sccs = sorted_sccs[-5:]
 
     # Get 5 largest SCCs in a separate list (final answer)
-    # largest_sccs = sorted_sizes[-5:]
     end_time = time.perf_counter()
     elapsed_time = end_time - start_time
-    print(f"All SCC sizes were: .")          # FIX
-    print(f"The five largest SCCs are: .")    # FIX
+    print(f"All SCC sizes were: {sorted_sccs}.")            # FIX
+    print(f"The five largest SCCs are: {largest_sccs}.")    # FIX
     print(f"The time taken for these SCCs to be calculated was: {elapsed_time} seconds.")
 
 
