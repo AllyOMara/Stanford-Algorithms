@@ -31,7 +31,7 @@ import sys
 
 sys.setrecursionlimit(100000)
 
-finish_time     = 0                     # Incremented to update finishing_times
+finish_time     = 0                     # Incremented
 finishing_times = {}                    # Dictionary of finish times : node
 scc_size        = 0                     # Tracks size of scc
 scc_sizes       = []                    # Tracks scc sizes
@@ -44,7 +44,7 @@ file_name_4     = "scc-33300.txt"       # Scc sizes = 3,3,3,0,0, max node = 9
 file_name_5     = "scc-33110.txt"       # Scc sizes = 3,3,1,1,0, max node = 8
 file_name_6     = "scc-11110.txt"       # Scc sizes = 1,1,1,1,0, max node = 4
 
-current_file    = file_name_1           # Easily change which file is being used
+current_file    = file_name_1
 
 
 def insertion_and_deletion(array, value):
@@ -76,9 +76,9 @@ def insertion_and_deletion(array, value):
 
 def create_adj_list(size):
     
-    """ Create list of length size + 1 (allows for easier indexing).
+    """ Create list of length size + 1.
     :param size: Integer (adjacency list size).
-    :return: List of length size + 1. All indexes contain an empty list.
+    :return: List, indexes contain an empty list.
     """
     
     return_list = [[]]
@@ -91,8 +91,8 @@ def create_adj_list(size):
 
 def create_graph(file_name):
     
-    """ Create adjacency list to represent graph.
-    :param file_name: String (determines which file will be used to create adjacency lists).
+    """ Create graph.
+    :param file_name: String (represents file).
     Returns:
         Graph.
     """
@@ -111,8 +111,8 @@ def create_graph(file_name):
 
 def create_graph_rev(file_name):
     
-    """ Create adjacency list to represent graph with reversed edges.
-    :param file_name: String (determines which file will be used to create adjacency lists).
+    """ Create graph with reversed edges.
+    :param file_name: String (determines file).
     Returns:
         Graph with reversed edges.
     """
@@ -131,9 +131,9 @@ def create_graph_rev(file_name):
 
 def create_visited_nodes_list(size):
     
-    """ Create list of length size + 1 (allows for easier indexing).
+    """ Create list of length size + 1.
     :param size: Integer (adjacency list size).
-    :return: List of length size + 1. All indexes contain "False.
+    :return: List, indexes contain "False".
     """
     
     return_list = [False]
@@ -146,9 +146,9 @@ def create_visited_nodes_list(size):
 
 def reverse_dfs(reversed_graph, given_node, visited_nodes):
     
-    """ Compute finishing times for each node by using DFS on the reversed graph.
-    :param reversed_graph: Adjacency list (given graph with reversed edges).
-    :param given_node: Integer (represents the node which has been recursed on).
+    """ Compute finishing times for each node.
+    :param reversed_graph: Adjacency list (reversed graph).
+    :param given_node: Integer (represents node).
     :param visited_nodes: List
     """
 
@@ -170,9 +170,9 @@ def reverse_dfs(reversed_graph, given_node, visited_nodes):
 
 def find_sccs(graph, given_node, visited_nodes):
     
-    """ Finds SCCs and their size using DFS on highest to lowest finishing times.
-    :param graph: Adjacency list (the given graph).
-    :param given_node: Integer (represents the given node).
+    """ Finds SCCs and their size.
+    :param graph: Adjacency list (given graph).
+    :param given_node: Integer (represents node).
     :param visited_nodes: List.
     """
 
@@ -190,6 +190,10 @@ def find_sccs(graph, given_node, visited_nodes):
 
 
 def five_largest_sccs():
+    
+    """ Prints five largest sccs in non-descending order.
+    """
+    
     global leader
     global scc_size
     global scc_sizes
@@ -202,8 +206,7 @@ def five_largest_sccs():
     for node in range(MAX_RANGE, 0, -1):
         if visited_nodes[node] == False:
             reverse_dfs(graph_rev, node, visited_nodes)
-
-    # Reset visited nodes
+    
     visited_nodes = create_visited_nodes_list(MAX_RANGE)
     
     # Second loop
