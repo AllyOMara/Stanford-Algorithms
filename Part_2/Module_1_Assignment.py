@@ -28,26 +28,49 @@ NOTE: Uses Kosaraju's Algorithm.
 import time
 import sys
 
+
 sys.setrecursionlimit(100000)
+
 finish_time     = 0                     # Incremented to update finishing_times
-file_name_1     = "SCC.txt"             # Assigned file
-file_name_2     = "small_graph_01.txt"  # File with a small graph
-file_name_3     = "small_graph_02.txt"  # File with a small, known graph
-current_file    = file_name_1           # Easily change which file is being used
-leader          = 0                     # Tracks leader node
-finishing_times = {}                    # Finish times and corresponding finish times
+finishing_times = {}                    # Dictionary of finish times : node
+scc_size        = 0                     # Tracks size of scc
 scc_sizes       = []                    # Tracks scc sizes
 MAX_RANGE       = 875714                # Largest node number
 
+file_name_1     = "SCC.txt"             # Assigned file - max node is 875714
+file_name_2     = "small_graph_01.txt"  # File with a small graph
+file_name_3     = "small_graph_02.txt"  # File with a small, known graph
+file_name_4     = "scc-33300.txt"       # Scc sizes = 3,3,3,0,0, max node = 9
+file_name_5     = "scc-33110.txt"       # Scc sizes = 3,3,1,1,0, max node = 8
+file_name_6     = "scc-11110.txt"       # Scc sizes = 1,1,1,1,0, max node = 4
+
+current_file    = file_name_1           # Easily change which file is being used
+
 
 def insertion_and_deletion(array, value):
-    inserted = False
-    for i in range(len(array)):
-        if inserted == False:    
-            if value < array[i]:
-                array.insert(i, value)
-                inserted = True
-    array.pop(0)
+    
+    """ Insert value into array, non-decreasing order.
+    :param array: Array (max length 5)
+    :param value: Integer (scc size)
+    Returns:
+        Array (length <= 5) after inserting value
+    """
+
+    if len(array) == 0:
+        array.append(value)
+    
+    else:
+        inserted = False
+        for i in range(len(array)):
+            if inserted == False:
+                if value < array[i] or value == array[i]:
+                    array.insert(i, value)
+                    inserted = True
+        if inserted == False:
+            array.append(value)
+        if len(array) > 5:
+            array.pop(0)
+    
     return array
 
 
@@ -59,8 +82,10 @@ def create_adj_list(size):
     """
     
     return_list = [[]]
+    
     for i in range(size):
         return_list.append([])
+    
     return return_list
     
 
@@ -68,6 +93,8 @@ def create_graph(file_name):
     
     """ Create adjacency list to represent graph.
     :param file_name: String (determines which file will be used to create adjacency lists).
+    Returns:
+        Graph.
     """
 
     graph = create_adj_list(MAX_RANGE)
@@ -86,6 +113,8 @@ def create_graph_rev(file_name):
     
     """ Create adjacency list to represent graph with reversed edges.
     :param file_name: String (determines which file will be used to create adjacency lists).
+    Returns:
+        Graph with reversed edges.
     """
     
     graph_rev = create_adj_list(MAX_RANGE)
@@ -101,15 +130,18 @@ def create_graph_rev(file_name):
 
 
 def create_visited_nodes_list(size):
+    
     """ Create list of length size + 1 (allows for easier indexing).
     :param size: Integer (adjacency list size).
     :return: List of length size + 1. All indexes contain "False.
     """
     
     return_list = [False]
+    
     for i in range(size):
         return_list.append(False)
-    return return_list   
+    
+    return return_list
 
 
 def reverse_dfs(reversed_graph, given_node, visited_nodes):
@@ -122,18 +154,17 @@ def reverse_dfs(reversed_graph, given_node, visited_nodes):
 
     global finish_time
     global finishing_times
-    # 1. Mark given_node as explored
+
     visited_nodes[given_node] = True
-    # 2. For each node adjacent to the given node, recurse
     end_nodes = reversed_graph[given_node]
+    
     if len(end_nodes) > 0:
         for i in range(len(end_nodes)):
             end_node = end_nodes[i]
             if visited_nodes[end_node] == False:
                 reverse_dfs(reversed_graph, end_node, visited_nodes)
-    # 3. Increment the finishing time
+
     finish_time = finish_time + 1
-    # 4. Set global finishing time of given_node to the finishing time
     finishing_times.update({finish_time : given_node})
 
 
@@ -143,69 +174,56 @@ def find_sccs(graph, given_node, visited_nodes):
     :param graph: Adjacency list (the given graph).
     :param given_node: Integer (represents the given node).
     :param visited_nodes: List.
-    :param leaders: List (tracks leader of each node).
-    :param leader: Integer (leader node).
     """
-    
-    # 1. Mark current node as visited
+
+    global scc_size
+    global scc_sizes
+
     visited_nodes[given_node] = True
     end_nodes = graph[given_node]
-    # 2. Based on given_node, dfs to find SCC
+
     for i in range(len(end_nodes)):
         end_node = end_nodes[i]
         if visited_nodes[end_node] == False:
+            scc_size = scc_size + 1
             find_sccs(graph, end_node, visited_nodes)
-    
-    # Set leader of given_node to the given leader
-    
 
 
-def main():
-
+def five_largest_sccs():
     global leader
+    global scc_size
     global scc_sizes
     
     start_time = time.perf_counter()
     visited_nodes = create_visited_nodes_list(MAX_RANGE)
     graph, graph_rev = create_graph(current_file), create_graph_rev(current_file)
 
-    # First loop (on the reverse graph). Gets finishing times
+    # First loop
     for node in range(MAX_RANGE, 0, -1):
         if visited_nodes[node] == False:
             reverse_dfs(graph_rev, node, visited_nodes)
 
-    # Reset visited nodes list
+    # Reset visited nodes
     visited_nodes = create_visited_nodes_list(MAX_RANGE)
     
-    # Second loop (on graph). Finds SCCs
+    # Second loop
     for finished_time in range(MAX_RANGE, 0, -1):
         node = finishing_times.get(finished_time)
         if visited_nodes[node] == False:
-            leader = node
+            scc_size = 1
             find_sccs(graph, node, visited_nodes)
+            scc_sizes = insertion_and_deletion(scc_sizes, scc_size)
     
-    largest_sccs = scc_sizes[-5:]
-
-    # Get 5 largest SCCs in a separate list (final answer)
     end_time = time.perf_counter()
     elapsed_time = end_time - start_time
-    print(f"The five largest SCCs are: {largest_sccs}.")
-    print(f"The time taken for these SCCs to be calculated was: {elapsed_time} seconds.")
+
+    print(f"The five largest SCCs are: {scc_sizes}.")
+    print(f"The time taken was: {elapsed_time} seconds.")
+
+
+def main():
+    five_largest_sccs()
 
 
 if __name__ == "__main__":
     main()
-
-
-'''
-TO DO
-
-x. main() function should not do any work (eventually).
-
----
-
-DONE
-
-
-
-'''
