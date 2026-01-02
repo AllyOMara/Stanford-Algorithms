@@ -132,7 +132,7 @@ def create_graph_rev(file_name):
 def create_visited_nodes_list(size):
     
     """ Create list of length size + 1.
-    :param size: Integer (adjacency list size).
+    :param size: Integer (list size).
     :return: List, indexes contain "False".
     """
     
