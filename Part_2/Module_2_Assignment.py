@@ -26,13 +26,74 @@ distances to the following ten vertices, in order:
 
 # SETUP
 # List of processed nodes
+visited_nodes   = []
 # List of computed shortest path distances for each node
+shortest_paths  = []
 # Dictionary of edge lengths
+weights = {}
+# Maximum node value
+MAX_RANGE = 200
+
+
+def create_visited_nodes_list(size):
+    
+    """ Create list of length size + 1.
+    :param size: Integer (list size).
+    """
+    
+    global visited_nodes
+
+    visited_nodes = [True]  # No node labelled "0"
+    
+    for i in range(size):
+        visited_nodes.append(False)
+
+
+def create_shortest_path_list(size):
+    
+    """ Create list of length size + 1.
+    :param size: Integer (list size).
+    """
+
+    global shortest_paths
+
+    shortest_paths = [0]
+
+    for i in range(size):
+        shortest_paths.append(0)
+
+
+# Function to create dictionary - 
+def create_dictionary(file_name):
+
+    global weights
+    edges = {}
+
+    with open(file_name) as file:
+        for line in file:
+            edges = {}
+            outgoing_edges = line.split()
+            node = int(outgoing_edges[0])
+            outgoing_edges.pop(0)
+            while len(outgoing_edges) > 0:
+                current_edge = outgoing_edges[0]
+                comma_index = current_edge.index(",")
+                end_node = int(current_edge[:comma_index])
+                weight = int(current_edge[-(len(current_edge) - comma_index - 1):])
+                edges.update({end_node : weight})
+                outgoing_edges.pop(0)
+            weights.update({node : edges})
 
 
 # MAIN LOOP
+# Setup any variables
+create_visited_nodes_list(MAX_RANGE)
+create_shortest_path_list(MAX_RANGE)
+visited_nodes[1] = True                 # Start node (1) is processed
 # Check (while loop) if processed vertices includes all vertices in the graph
+while False in visited_nodes:
     # If false, check all outgoing edges from processed to unprocessed vertices
+
     # Choose the edge which minimises Dijkstra's greedy criterion (shortest path)
     # Mark node as processed
     # Update shortest path distance for the node
