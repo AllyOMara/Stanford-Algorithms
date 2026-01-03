@@ -34,9 +34,9 @@ weights = {}
 # Maximum node value
 MAX_RANGE = 200
 
-file_name_1 = "dijkstraData.txt"    # Assigned file
+FILE_NAME_1 = "dijkstraData.txt" # Assigned file
 
-chosen_file = file_name_1
+chosen_file = FILE_NAME_1
 
 
 def create_visited_nodes_list(size):
@@ -67,7 +67,6 @@ def create_shortest_path_list(size):
         shortest_paths.append(0)
 
 
-# Function to create dictionary
 def create_dictionary(file_name):
     global weights
     edges = {}
@@ -164,6 +163,7 @@ def dijkstra():
 
 def main():
     dijkstra()
+
 
 if __name__ == "__main__":
     main()
