@@ -67,7 +67,7 @@ def create_shortest_path_list(size):
         shortest_paths.append(0)
 
 
-# Function to create dictionary - 
+# Function to create dictionary
 def create_dictionary(file_name):
     global weights
     edges = {}
@@ -88,7 +88,7 @@ def create_dictionary(file_name):
             weights.update({node: edges})
 
 
-def source_node_list(file_name, size):
+def create_graph(file_name, size):
     source_nodes = [[]]
     for i in range(size):
         source_nodes.append([])
@@ -107,26 +107,63 @@ def source_node_list(file_name, size):
     return source_nodes
 
 
-
 def dijkstra():
+    global weights
+    global visited_nodes
+    global shortest_paths
+    
+    # MAIN LOOP
+    # Setup any variables
+    graph = create_graph(chosen_file, MAX_RANGE)
+    create_visited_nodes_list(MAX_RANGE)
+    create_shortest_path_list(MAX_RANGE)
+    create_dictionary(chosen_file)
+    visited_nodes[1] = True # Start node (1) is processed
+
+    # Check (while loop) if processed vertices does not include all vertices in the graph
+    while False in visited_nodes:
+        edge_length = 0
+        # Check all outgoing edges from processed to unprocessed vertices
+        for parent_node in range(len(graph)):
+            if visited_nodes[parent_node] == True:
+                needs_processing = False
+                child_nodes = graph[parent_node]
+                for i in range(len(child_nodes)):
+                    possible_child_node = child_nodes[i]
+                    if visited_nodes[possible_child_node] == False:
+                        # Choose the edge which minimises Dijkstra's greedy criterion (shortest path)
+                            possible_edge_length = weights[parent_node][possible_child_node]
+                            if edge_length == 0:
+                                edge_length = possible_edge_length
+                            elif possible_edge_length < edge_length:
+                                edge_length = possible_child_node
+                                child_node = possible_child_node
+                                needs_processing = True
+                # Mark node as processed
+                if needs_processing == True:
+                    visited_nodes[child_node] = True
+                    # Update shortest path distance for the node
+                    shortest_paths[child_node] = shortest_paths[parent_node] + edge_length
+
+    # OUTPUT
+    # Retrieve the ten vertices' shortest paths (7,37,59,82,99,115,133,165,188,197)
+    PATH_7 = {shortest_paths[7]}
+    PATH_37 = {shortest_paths[37]}
+    PATH_59 = {shortest_paths[59]}
+    PATH_82 = {shortest_paths[82]}
+    PATH_99 = {shortest_paths[99]}
+    PATH_115 = {shortest_paths[115]}
+    PATH_133 = {shortest_paths[133]}
+    PATH_165 = {shortest_paths[165]}
+    PATH_188 = {shortest_paths[188]}
+    PATH_197 = {shortest_paths[197]}
+    ten_shortest_paths = f"{PATH_7},{PATH_37},{PATH_59},{PATH_82},{PATH_99},{PATH_115},{PATH_133},{PATH_165},{PATH_188},{PATH_197}"
+    # Print
+    print(ten_shortest_paths)
 
 
-# MAIN LOOP
-# Setup any variables
-create_visited_nodes_list(MAX_RANGE)
-create_shortest_path_list(MAX_RANGE)
-source_nodes = source_node_list(chosen_file, MAX_RANGE)
-create_dictionary(chosen_file)
-visited_nodes[1] = True                 # Start node (1) is processed
+def main():
+    dijkstra()
 
-# Check (while loop) if processed vertices includes all vertices in the graph
-while False in visited_nodes:
-    # If false, check all outgoing edges from processed to unprocessed vertices
-
-    # Choose the edge which minimises Dijkstra's greedy criterion (shortest path)
-    # Mark node as processed
-    # Update shortest path distance for the node
-
-# OUTPUT
-# Retrieve the ten vertices' shortest paths
-# Print
+if __name__ == "__main__":
+    main()
