@@ -106,6 +106,24 @@ def create_graph(file_name, size):
     return source_nodes
 
 
+def output():
+    global shortest_paths
+
+    PATH_7 = {shortest_paths[7]}
+    PATH_37 = {shortest_paths[37]}
+    PATH_59 = {shortest_paths[59]}
+    PATH_82 = {shortest_paths[82]}
+    PATH_99 = {shortest_paths[99]}
+    PATH_115 = {shortest_paths[115]}
+    PATH_133 = {shortest_paths[133]}
+    PATH_165 = {shortest_paths[165]}
+    PATH_188 = {shortest_paths[188]}
+    PATH_197 = {shortest_paths[197]}
+    ten_shortest_paths = f"{PATH_7},{PATH_37},{PATH_59},{PATH_82},{PATH_99},{PATH_115},{PATH_133},{PATH_165},{PATH_188},{PATH_197}"
+
+    print(ten_shortest_paths)
+
+
 def dijkstra():
     global weights
     global visited_nodes
@@ -146,19 +164,8 @@ def dijkstra():
 
     # OUTPUT
     # Retrieve the ten vertices' shortest paths (7,37,59,82,99,115,133,165,188,197)
-    PATH_7 = {shortest_paths[7]}
-    PATH_37 = {shortest_paths[37]}
-    PATH_59 = {shortest_paths[59]}
-    PATH_82 = {shortest_paths[82]}
-    PATH_99 = {shortest_paths[99]}
-    PATH_115 = {shortest_paths[115]}
-    PATH_133 = {shortest_paths[133]}
-    PATH_165 = {shortest_paths[165]}
-    PATH_188 = {shortest_paths[188]}
-    PATH_197 = {shortest_paths[197]}
-    ten_shortest_paths = f"{PATH_7},{PATH_37},{PATH_59},{PATH_82},{PATH_99},{PATH_115},{PATH_133},{PATH_165},{PATH_188},{PATH_197}"
-    # Print
-    print(ten_shortest_paths)
+    output()
+
 
 
 def main():
@@ -167,3 +174,18 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+'''
+TO DO:
+
+x. Create smaller test files
+x. Fix main loop (under dijkstra())
+
+
+Completed:
+
+x. Make output() function - prints final answer
+
+'''
