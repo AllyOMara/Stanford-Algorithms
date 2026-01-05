@@ -24,20 +24,13 @@ distances to the following ten vertices, in order:
 7,37,59,82,99,115,133,165,188,197.
 '''
 
-# SETUP
-# List of fully processed nodes (true / false)
+
 fully_processed_nodes = []
-# List of processed nodes (within processed area)
 processed_nodes = [1]
-# List of computed shortest path distances for each node
 shortest_paths = []
-# Dictionary of edge lengths
-weights = {}
-# Check if node is connected to same graph as start node
-connected = {}
-# List of possible edge lengths
 possible_paths = []
-# Maximum node value
+connected = {}
+weights = {}
 MAX_RANGE = 200
 
 FILE_NAME_1 = "dijkstraData.txt" # Assigned file
@@ -52,7 +45,13 @@ chosen_file = FILE_NAME_1
 def create_processed_nodes_list(size):
 
     """ Create list of length size + 1.
-    :param size: Integer (list size).
+    
+    Arguments:
+        size: (Integer) List size.
+
+    Typical usage example:
+        create_processed_nodes_list(10)
+        fully_processed_nodes[1] = True
     """
     
     global fully_processed_nodes
@@ -66,7 +65,13 @@ def create_processed_nodes_list(size):
 def create_shortest_path_list(size):
 
     """ Create list of length size + 1.
-    :param size: Integer (list size).
+    
+    Arguments:
+        size: (Integer) List size.
+
+    Typical usage example:
+        create_shortest_path_list(10)
+        shortest_paths[9] = 100
     """
 
     global shortest_paths
@@ -78,6 +83,17 @@ def create_shortest_path_list(size):
 
 
 def create_dictionary(file_name):
+
+    """ Creates dictionary for edge weights between two nodes.    
+    
+    Arguments:
+        file_name: (String) File to be read from.
+    
+    Typical usage example:
+        create_dictionary('dijkstraData.txt')
+        dijkstra_greedy_criterion = weights[9][5] + shortest_paths[9]
+    """
+
     global weights
     edges = {}
 
@@ -98,6 +114,18 @@ def create_dictionary(file_name):
 
 
 def create_graph(file_name, size):
+    
+    """ Creates adjacency list from file (without weights)
+    
+    Arguments:
+        file_name: (String) File to be read from.
+        size: (Integer) Largest node number.
+
+    Typical usage example:
+        create_graph('dijkstraData.txt', MAX_RANGE)
+        child_nodes = graph[7]
+    """
+    
     source_nodes = [[]]
     for i in range(size):
         source_nodes.append([])
@@ -116,16 +144,19 @@ def create_graph(file_name, size):
     return source_nodes
 
 
-def create_possible_paths(size):
-    global possible_paths
-
-    possible_paths = [0]
-    
-    for i in range(size):
-        possible_paths.append(0)
-
-
 def check_connectivity(given_node, graph):
+
+    """ Modified depth-first search (DFS). Marks connected nodes as "True".
+    
+    Arguments:
+        given_node: (Integer) Starting node.
+        graph: (Adjacency list) Represents given graph.
+    
+    Typical usage example:
+        check_connectivity('dijkstraData.txt', [[1,2], [2,4], [3,1]])
+        remove_unconnected_nodes('dijkstraData.txt', 4)
+    """
+
     global fully_processed_nodes
     global MAX_RANGE
     global connected
@@ -142,7 +173,20 @@ def check_connectivity(given_node, graph):
     connected.update({given_node : True})
 
 
-def remove_unconnected_nodes(graph, max_range, processed_nodes):
+def remove_unconnected_nodes(graph, max_range):
+
+    """ Marks unconnected nodes as "True" in processed_nodes, and empties graph at that node.
+    
+    Arguments:
+        graph: (Adjacency list) Starting node.
+        max_range: (Integer) Largest node value.
+    
+    Typical usage example:
+        remove_unconnected_nodes([[1,2], [2,4], [3,1]], MAX_RANGE)
+        dijkstra()
+    """
+
+    global fully_processed_nodes
     global connected
     
     for i in range(max_range + 1):
@@ -152,6 +196,14 @@ def remove_unconnected_nodes(graph, max_range, processed_nodes):
 
 
 def output():
+
+    """ Prints final answer.
+
+    Typical usage example:
+        shortest_paths = [0, 0, 56, 42, 99, 1, 400, ...]
+        output()
+    """
+
     global shortest_paths
     PATH_7 = shortest_paths[7]
     PATH_37 = shortest_paths[37]
@@ -169,37 +221,37 @@ def output():
 
 
 def dijkstra():
+
+    """ Uses dijkstra's shortest path algorithm to find the shortest paths of 10 given nodes.
+    
+    Typical usage example:
+        if len(processed_nodes < MAX_RANGE):
+            dijkstra()
+    """
+
     global weights
     global fully_processed_nodes
     global shortest_paths
-    global possible_paths
     global processed_nodes
 
-    # MAIN LOOP
-    # Setup any variables
     graph = create_graph(chosen_file, MAX_RANGE)
     create_dictionary(chosen_file)
     create_processed_nodes_list(MAX_RANGE)
     create_shortest_path_list(MAX_RANGE)
-    # remove nodes from graph which are NOT connected !
     check_connectivity(1, graph)
-    remove_unconnected_nodes(graph, MAX_RANGE, fully_processed_nodes)
+    remove_unconnected_nodes(graph, MAX_RANGE)
     create_processed_nodes_list(MAX_RANGE)
 
-    # Check (while loop) if processed vertices does not include all vertices in the graph
     while len(processed_nodes) < MAX_RANGE:
         path_length = 0
         needs_processing = False
-            # Check all outgoing edges from processed to unprocessed vertices
         for i in range(len(processed_nodes)):
             possible_parent_node = processed_nodes[i]
-            create_possible_paths(MAX_RANGE)
             child_nodes = graph[possible_parent_node]
             for i in range(len(child_nodes)):
                 possible_child_index = i
                 possible_child_node = child_nodes[i]
                 if possible_child_node not in processed_nodes:
-                    # Choose the edge which minimises Dijkstra's greedy criterion (shortest path)
                     possible_path_length = weights[possible_parent_node][possible_child_node] + shortest_paths[possible_parent_node]
                     if path_length == 0 or (possible_path_length < path_length):
                         path_length = possible_path_length
@@ -208,15 +260,10 @@ def dijkstra():
                         child_index = possible_child_index
                         needs_processing = True
         if needs_processing == True:
-            # Mark node as processed
             processed_nodes.append(child_node)
-                # Update shortest path distance for the node
             shortest_paths[child_node] = path_length
             graph[parent_node].pop(child_index)
 
-
-    # OUTPUT
-    # Retrieve and print shortest paths (7,37,59,82,99,115,133,165,188,197)
     output()
 
 
@@ -226,19 +273,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-'''
-TO DO:
-
-x. Create smaller test files
-x. Fix main loop (under dijkstra())
-x. Fix how to check which nodes have been processed
-
-
-Completed:
-
-x. Make output() function - prints final answer
-
-'''
