@@ -12,6 +12,7 @@ Solutions to programming assignments in the Stanford Algorithms Specialization c
 [Merge Sort](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_1/Module_2_Assignment.py)<br>
 [Optimised QuickSort](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_1/Module_3_Assignment_Part_3.py)<br>
 [Kosaraju's Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_2/Module_1_Assignment.py)<br>
+[Dijkstra's Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_2/Module_2_Assignment.py)<br>
 <br><br>
 
 ## Notes
