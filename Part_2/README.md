@@ -9,6 +9,10 @@ Part 2 of Algorithms Specialization. Graph Search, Shortest Paths, and Data Stru
 - [Modified Insertion Sort](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_2/Module_1_Assignment.py)<br>
 - [Dictionary Usage](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_2/Module_1_Assignment.py)<br>
 
+### Module 2
+- [Dijkstra's Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_2/Module_2_Assignment.py)<br>
+- [Dictionary Usage](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_2/Module_2_Assignment.py)<br>
+
 
 <br><br>
 
