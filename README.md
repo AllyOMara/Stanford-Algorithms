@@ -6,6 +6,7 @@ Solutions to programming assignments in the Stanford Algorithms Specialization c
 ## Parts
 [Part 1](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_1)<br>
 [Part 2](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_2)<br>
+[Part 3](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_3)<br>
 <br><br>
 
 ## Notable Projects
