@@ -27,7 +27,7 @@ schedule - a positive integer.
 '''
 
 
-def job_keys(file_name):
+def calculate_job_keys(file_name):
     """ Find each job's key (weight - length). Return array containing all keys.
 
     Reads the given file (file_name), and generates the key for each job. The
@@ -37,7 +37,7 @@ def job_keys(file_name):
     pass
 
 
-def key_to_job_dictionary(job_keys):
+def create_key_to_job_dictionary(job_keys):
     """ Loop through job_keys (array), adding the job associated with each key
     to a dictionary.
 
@@ -48,7 +48,7 @@ def key_to_job_dictionary(job_keys):
     pass
 
 
-def weights_list(file_name):
+def create_weights_list(file_name):
     """ List of weights of all jobs. Returned in an array.
 
     Used to resolve 'ties' in keys by scheduling the job with the higher weight
@@ -57,7 +57,7 @@ def weights_list(file_name):
     """
 
 
-def completion_times(final_schedule):
+def calculate_completion_time(final_schedule):
     """ Returns the final answer (the sum of weighted completion times).
 
     Uses final_schedule to calculate the sum of weighted completion times, which
