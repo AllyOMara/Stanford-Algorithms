@@ -33,70 +33,42 @@ connected = {}
 weights = {}
 MAX_RANGE = 200
 
-FILE_NAME_1 = "dijkstraData.txt" # Assigned file
-FILE_NAME_2 = "dijkstra-0946310.txt"
-FILE_NAME_3 = "dijkstra-39.txt"
-FILE_NAME_4 = "dijkstra-01234432.txt"
-FILE_NAME_5 = "dijkstra-03585711461010.txt"
-
-chosen_file = FILE_NAME_1
-
 
 def create_processed_nodes_list(size):
-
     """ Create list of length size + 1.
     
     Arguments:
         size: (Integer) List size.
-
-    Typical usage example:
-        create_processed_nodes_list(10)
-        fully_processed_nodes[1] = True
     """
     
     global fully_processed_nodes
-
     fully_processed_nodes = [True]  # No node labelled "0"
-    
     for i in range(size):
         fully_processed_nodes.append(False)
 
 
 def create_shortest_path_list(size):
-
     """ Create list of length size + 1.
     
     Arguments:
         size: (Integer) List size.
-
-    Typical usage example:
-        create_shortest_path_list(10)
-        shortest_paths[9] = 100
     """
 
     global shortest_paths
-
     shortest_paths = [0]
-
     for i in range(size):
         shortest_paths.append(0)
 
 
 def create_dictionary(file_name):
-
     """ Creates dictionary for edge weights between two nodes.    
     
     Arguments:
         file_name: (String) File to be read from.
-    
-    Typical usage example:
-        create_dictionary('dijkstraData.txt')
-        dijkstra_greedy_criterion = weights[9][5] + shortest_paths[9]
     """
 
     global weights
     edges = {}
-
     with open(file_name) as file:
         for line in file:
             edges = {}
@@ -114,22 +86,16 @@ def create_dictionary(file_name):
 
 
 def create_graph(file_name, size):
-    
     """ Creates adjacency list from file (without weights)
     
     Arguments:
         file_name: (String) File to be read from.
         size: (Integer) Largest node number.
-
-    Typical usage example:
-        create_graph('dijkstraData.txt', MAX_RANGE)
-        child_nodes = graph[7]
     """
     
     source_nodes = [[]]
     for i in range(size):
         source_nodes.append([])
-    
     with open(file_name) as file:
         for line in file:
             outgoing_edges = line.split()
@@ -145,50 +111,36 @@ def create_graph(file_name, size):
 
 
 def check_connectivity(given_node, graph):
-
     """ Modified depth-first search (DFS). Marks connected nodes as "True".
     
     Arguments:
         given_node: (Integer) Starting node.
         graph: (Adjacency list) Represents given graph.
-    
-    Typical usage example:
-        check_connectivity('dijkstraData.txt', [[1,2], [2,4], [3,1]])
-        remove_unconnected_nodes('dijkstraData.txt', 4)
     """
 
     global fully_processed_nodes
     global MAX_RANGE
     global connected
-
     fully_processed_nodes[given_node] = True
     end_nodes = graph[given_node]
-    
     if len(end_nodes) > 0:
         for i in range(len(end_nodes)):
             end_node = end_nodes[i]
             if fully_processed_nodes[end_node] == False:
                 check_connectivity(end_node, graph)
-
     connected.update({given_node : True})
 
 
 def remove_unconnected_nodes(graph, max_range):
-
     """ Marks unconnected nodes as "True" in processed_nodes, and empties graph at that node.
     
     Arguments:
         graph: (Adjacency list) Starting node.
         max_range: (Integer) Largest node value.
-    
-    Typical usage example:
-        remove_unconnected_nodes([[1,2], [2,4], [3,1]], MAX_RANGE)
-        dijkstra()
     """
 
     global fully_processed_nodes
     global connected
-    
     for i in range(max_range + 1):
         if i not in connected:
             graph[i] = []
@@ -196,12 +148,7 @@ def remove_unconnected_nodes(graph, max_range):
 
 
 def output():
-
     """ Prints final answer.
-
-    Typical usage example:
-        shortest_paths = [0, 0, 56, 42, 99, 1, 400, ...]
-        output()
     """
 
     global shortest_paths
@@ -216,23 +163,23 @@ def output():
     PATH_188 = shortest_paths[188]
     PATH_197 = shortest_paths[197]
     ten_shortest_paths = f"{PATH_7},{PATH_37},{PATH_59},{PATH_82},{PATH_99},{PATH_115},{PATH_133},{PATH_165},{PATH_188},{PATH_197}"
-
     print(ten_shortest_paths)
 
 
 def dijkstra():
-
     """ Uses dijkstra's shortest path algorithm to find the shortest paths of 10 given nodes.
-    
-    Typical usage example:
-        if len(processed_nodes < MAX_RANGE):
-            dijkstra()
     """
 
     global weights
-    global fully_processed_nodes
     global shortest_paths
     global processed_nodes
+
+    FILE_NAME_1 = "dijkstraData.txt" # Assigned file
+    FILE_NAME_2 = "dijkstra-0946310.txt"
+    FILE_NAME_3 = "dijkstra-39.txt"
+    FILE_NAME_4 = "dijkstra-01234432.txt"
+    FILE_NAME_5 = "dijkstra-03585711461010.txt"
+    chosen_file = FILE_NAME_1
 
     graph = create_graph(chosen_file, MAX_RANGE)
     create_dictionary(chosen_file)
