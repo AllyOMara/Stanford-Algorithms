@@ -10,11 +10,6 @@
 <br><br>
 
 
-# Stanford University Algorithms Specialization Course
-Solutions to programming assignments in the [Stanford Algorithms Specialization course on Coursera](https://www.coursera.org/specializations/algorithms).<br>
-Does not cover every programming assignment in all four courses, but covers those relevant to Australian VCE Algorithms Units 3&4.<br>
-<br>
-
 ## Parts (Courses)
 [Part 1- Divide and Conquer, Sorting and Searching, and Randomized Algorithms](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_1)<br><br>
 [Part 2 - Graph Search, Shortest Paths, and Data Structures](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_2)<br><br>
