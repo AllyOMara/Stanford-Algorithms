@@ -5,9 +5,9 @@
 
 [![Coursera](https://img.shields.io/badge/cousera-blue.svg?style=for-the-badge&logo=coursera)](https://www.coursera.org/specializations/algorithms)
 [![Algorithms Illuminated](https://img.shields.io/badge/Algorithms_Illuminated-darkblue.svg?style=for-the-badge&logo=none)](https://www.algorithmsilluminated.org/)
--------------------------------
+______________________
 </div>
-<br><br>
+<br>
 
 
 ## Parts (Courses)
