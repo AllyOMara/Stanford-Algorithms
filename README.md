@@ -1,7 +1,4 @@
 # Stanford University Algorithms Specialization Course
-<br>
-
-## Overview
 Solutions to programming assignments in the [Stanford Algorithms Specialization course on Coursera](https://www.coursera.org/specializations/algorithms).<br>
 Does not cover every programming assignment in all four courses, but covers those relevant to Australian VCE Algorithms Units 3&4.<br>
 <br><br>
