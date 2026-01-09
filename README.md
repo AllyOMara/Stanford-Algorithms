@@ -1,4 +1,5 @@
 # Stanford University Algorithms Specialization Course
+<br>
 
 ## Overview
 Solutions to programming assignments in the [Stanford Algorithms Specialization course on Coursera](https://www.coursera.org/specializations/algorithms).<br>
