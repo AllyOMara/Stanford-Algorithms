@@ -110,6 +110,7 @@ def calculate_job_keys(file_name):
     key can be defined as weight minus length, and is used in this greedy
     algorithm to determine the final job ordering.
     """
+
     job_keys = []
     with open(file_name) as file:
         for line in file:
@@ -122,7 +123,7 @@ def calculate_job_keys(file_name):
     return job_keys
 
 
-def create_key_to_job_dict(job_keys):
+def create_key_to_job_dict(job_keys, file_name):
     """ Loop through job_keys (array), adding the job associated with each key
     to a dictionary.
 
@@ -132,12 +133,20 @@ def create_key_to_job_dict(job_keys):
     """
     
     dictionary = {}
-    for i in range(len(job_keys)):
-        key = job_keys[i]
-        if key not in dictionary:
-            dictionary.update({key : [i + 1]})
-        else:
-            dictionary[key].append(i + 1)
+    line_number = 0
+
+    with open(file_name) as file:
+        for line in file:
+            job_description = line.split()
+            if len(job_description) > 1:
+                job_weight = (int(job_description[0]))
+                job_length = (int(job_description[1]))
+                job_key = int(job_weight - job_length)
+                line_number = line_number + 1
+                if job_key not in dictionary:
+                    dictionary.update({job_key : [line_number]})
+                else:
+                    dictionary[job_key].append(line_number)
     
     return dictionary
             
@@ -187,7 +196,7 @@ def calculate_schedule(key_to_job_dict,
     visited_keys = []
     final_schedule = []
     while len(sorted_keys) > 0:
-        key_index = len(sorted_keys) - 1
+        key_index = (len(sorted_keys) - 1)
         key = sorted_keys[key_index]
         sorted_keys.pop(key_index)
         if key not in visited_keys:
@@ -197,7 +206,7 @@ def calculate_schedule(key_to_job_dict,
             else:
                 while len(jobs) > 0:
                     for i in range(len(jobs)):
-                        possible_job_weight = weights_list[i]
+                        possible_job_weight = weights_list[(jobs[i])]
                         if i == 0:
                             job = jobs[i]
                             job_index = 0
@@ -241,12 +250,14 @@ def greedy():
     """
     
     FILE_NAME_1 = 'jobs.txt'
-    FILE_NAME_2 = 'jobs_test_1.txt' # Ordering: 2,8,7,1,5,4,3,6
+    FILE_NAME_2 = 'jobs_test_1.txt' # Final answer = 1147
+    FILE_NAME_3 = 'jobs_test_2.txt' # Final answer = 1175612
     
-    chosen_file = FILE_NAME_2
+    chosen_file = FILE_NAME_1
 
     job_keys = calculate_job_keys(chosen_file)
-    key_to_job_dict = create_key_to_job_dict(job_keys)
+    print(job_keys)
+    key_to_job_dict = create_key_to_job_dict(job_keys, chosen_file)
     weights = create_weights_list(chosen_file)
     lengths = create_lengths_list(chosen_file)
     sorted_keys = quick_sort(job_keys)
@@ -263,17 +274,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-'''
-TO DO:
-
-x. Fill in functions
-x. Test on small test files
-
-Completed:
-x. Make outline ("skeleton")
-x. Make small test files
-
-
-'''
