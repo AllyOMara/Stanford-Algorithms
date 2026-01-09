@@ -1,6 +1,6 @@
 <div align="center">
 
-# Stanford University Algorithms Specialization Course
+# Stanford Algorithms Specialization Course Solutions
 ##### Learn To Think Like A Computer Scientist. Master the fundamentals of the design and analysis of algorithms.
 
 [![Coursera](https://img.shields.io/badge/cousera-blue.svg?style=for-the-badge&logo=coursera)](https://www.coursera.org/specializations/algorithms)
