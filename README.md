@@ -1,15 +1,25 @@
+<div align="center">
+
+# Stanford University Algorithms Specialization Course
+##### Learn To Think Like A Computer Scientist. Master the fundamentals of the design and analysis of algorithms.
+
+[![Coursera](https://img.shields.io/badge/cousera-blue.svg?style=for-the-badge&logo=coursera)](https://www.coursera.org/specializations/algorithms)
+[![Algorithms Illuminated](https://img.shields.io/badge/Algorithms_Illuminated-darkblue.svg?style=for-the-badge&logo=none)](https://www.algorithmsilluminated.org/)
+-------------------------------
+</div>
+<br><br>
+
+
 # Stanford University Algorithms Specialization Course
 Solutions to programming assignments in the [Stanford Algorithms Specialization course on Coursera](https://www.coursera.org/specializations/algorithms).<br>
 Does not cover every programming assignment in all four courses, but covers those relevant to Australian VCE Algorithms Units 3&4.<br>
-<br><br>
-
+<br>
 
 ## Parts (Courses)
 [Part 1- Divide and Conquer, Sorting and Searching, and Randomized Algorithms](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_1)<br><br>
 [Part 2 - Graph Search, Shortest Paths, and Data Structures](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_2)<br><br>
 [Part 3 - Greedy Algorithms, Minimum Spanning Trees, and Dynamic Programming](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_3)<br><br>
-<br><br>
-
+<br>
 
 ## References
 Useful resources on learning the Python programming language and designing and implementation of algorithms can be found below.
@@ -19,8 +29,7 @@ Useful resources on learning the Python programming language and designing and i
 - [Mathematics for Computer Science](https://www.amazon.com.au/Mathematics-Computer-Science-Lehman-Eric/dp/9888407066)<br><br>
 - [Coursera- Stanford University Algorithms Specialization Course](https://www.coursera.org/specializations/algorithms)<br><br>
 - [An Introduction to Algorithmic Thinking](https://www.lulu.com/shop/georgia-gouros/an-introduction-to-algorithmic-thinking-algorithmics-hess-student-guide/paperback/product-mnvzpy.html?page=1&pageSize=4)<br><br>
-<br><br>
-
+<br>
 
 ## Notable Implementations
 
@@ -33,7 +42,6 @@ See Module_2_Assignment.py<br>
 - Recursion usage - in MergeSort.
 - Usage of global variable to count number of inverses.<br>
 - Reading data from a file.<br>
-<br>
 
 ### [Optimised QuickSort](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_1)<br>
 QuickSort, where the pivot is chosen as the median of three elements (the first, middle, and last element in an array).<br>
@@ -65,4 +73,4 @@ See Module_2_Assignment.py<br>
 - Dijkstra's Algorithm - to find shortest paths from a starting node to ten other nodes.<br>
 - Dictionary usage - to implement 'look-ups' in O(1) time instead of O(n) time.<br>
 - Modified DFS - to check for connected nodes, so unconnected nodes can be ignored.<br>
-<br><br>
+<br>
