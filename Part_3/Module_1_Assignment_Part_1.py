@@ -56,7 +56,7 @@ def quick_sort(array):
     len_array = len(array)
     if len_array == 1:
         return array
-    
+
     first_index   = 0
     last_index    = len_array - 1
     if len_array % 2 == 1:
@@ -77,19 +77,17 @@ def quick_sort(array):
     else:
         pivot_index = last_index
 
-    # Partition
-    i = 1   # Index where elements less than the pivot ends
+    i = 1 # Index where elements less than the pivot ends
     pivot_array = [array[pivot_index]]
-    array[pivot_index], array[0] = array[0], array[pivot_index] # Swaps pivot element with the first element
+    array[pivot_index], array[0] = array[0], array[pivot_index] # Swaps first and pivot element
 
     for j in range(1, len_array):
         if array[0] > array[j]:
             array[i], array[j] = array[j], array[i]
             i = i + 1
-    
+
     array[i - 1], array[0] = array[0], array[i - 1] # "Puts" pivot in place
 
-    # Recursion
     left    = array[:i - 1]
     right   = array[i:]
     if len(left) > 1:
@@ -97,7 +95,6 @@ def quick_sort(array):
     if len(right) > 1:
         right = quick_sort(right)
 
-    # Combine into final array
     array = left + pivot_array + right
     
     return(array)
@@ -126,7 +123,7 @@ def create_key_to_job_dict(file_name):
     :param file_name: (String) Name of file with job descriptions.
     :returns: (Dictionary) Key : jobs pairs.
     """
-    
+
     dictionary = {}
     line_number = 0
     with open(file_name) as file:
@@ -142,8 +139,7 @@ def create_key_to_job_dict(file_name):
                 else:
                     dictionary[job_key].append(line_number)
     return dictionary
-            
-    
+
 
 def create_weights_list(file_name):
     """ Finds weights of all jobs. Returns in an array.
@@ -177,7 +173,6 @@ def create_lengths_list(file_name):
             else:
                 lengths_list.append(0)
     return lengths_list
-            
 
 
 def calculate_schedule(key_to_job_dict, weights, sorted_keys):
@@ -239,7 +234,7 @@ def calculate_completion_time(job_schedule, weights, lengths):
 def greedy():
     """ Greedy algorithm used to generate the final scheduling order of jobs.
     """
-    
+
     FILE_NAME_1 = 'jobs.txt'
     FILE_NAME_2 = 'jobs_test_1.txt' # Final answer = 1147
     FILE_NAME_3 = 'jobs_test_2.txt' # Final answer = 1175612
