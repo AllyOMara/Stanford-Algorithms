@@ -119,7 +119,7 @@ def calculate_job_keys(file_name):
 
 
 def create_key_to_job_dict(file_name):
-    """ Adds keys to a dictionary, where the jobs are the values.
+    """ Adds keys (weight / length) to a dictionary, where the jobs are the values.
     :param file_name: (String) Name of file with job descriptions.
     :returns: (Dictionary) Key : jobs pairs.
     """
