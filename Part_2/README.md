@@ -13,7 +13,7 @@ See Module_1_Assignment.py<br>
 - Modified Insertion Sort - limits array size to 5, buts keeps the array sorted.<br>
 - Depth-First Search (DFS) usage to search for SCCS.<br>
 - Usage of if __name__ == "__main__" and main() function.<br>
-- Docstring usage.<br>>
+- Docstring usage.<br>
 
 ### [Module 2 - Dijkstra's Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_2/Module_2_Assignment.py)<br>
 Dijkstra's Algorithm, used for finding the shortest paths from a starting node to all other connected nodes in a graph.<br>
