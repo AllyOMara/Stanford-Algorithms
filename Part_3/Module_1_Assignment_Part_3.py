@@ -28,9 +28,12 @@ cost of a minimum spanning tree (MST).
 
 
 def create_graph(file_name, max_range):
-    """ Creates an adjacency list of where each node is connected to.
+    """ Creates and returns adjacency list of the given graph.
+    :param file_name: (String) Name of file with graph.
+    :param max_range: (Integer) Maximum node value
+    :returns: (Array) Adjacency list of the given graph.
     """
-    
+
     graph = [[]]
     for i in range(max_range + 1):
         graph.append([])
@@ -41,13 +44,15 @@ def create_graph(file_name, max_range):
                 first_node = int(edge_description[0])
                 second_node = int(edge_description[1])
                 graph[first_node].append(second_node)
-                graph[second_node].append(first_node)   # Added twice due to the undirected nature of the graph
+                graph[second_node].append(first_node) # Added twice - undirected graph
+
     return graph
 
 
 def create_visited_nodes(max_range):
-    """ Creates list of size max node value containing False (to be updated
-    when a node is visited)
+    """ Creates and returns list of whether nodes are visited or not. (Boolean)
+    :param max_range: (Integer) Maximum node value.
+    :returns: List of whether nodes are visited or not.
     """
     visited_nodes = [True]  # No node '0'
     for i in range(max_range):
@@ -57,16 +62,9 @@ def create_visited_nodes(max_range):
 
 
 def create_edge_costs(file_name):
-    """ Creates dictionary of edge costs between nodes.
-
-    Should look something like this:
-    edge_costs = { 
-                    1:  1: 3,
-                        2: 5,
-                        7: -10
-                    2:  5: 9,
-                        6: 7
-                 }
+    """ Creates and returns dictionary of edge costs between nodes.
+    :param file_name: (String) Name of file with graph.
+    :returns: (Dictionary) Edge costs between nodes.
     """
     edge_costs = {}
     with open(file_name) as file:
@@ -88,7 +86,11 @@ def create_edge_costs(file_name):
 
 
 def prim(graph, visited_nodes_bool, edge_costs):
-    """ Main while loop to find and return the cost of the minimum spanning tree
+    """ Finds and returns the cost of the MST.
+    :param graph: (Adjacency List) Represents given graph.
+    :param visited_nodes_bool: (List) Size MAX_RANGE containing boolean values (whether the node was visited or not)
+    :param edge_costs: (Dictionary) Edge costs between two nodes.
+    :returns: (Integer) Sum of all edge costs of the final MST.
     """
 
     visited_nodes_list = [1]
@@ -121,11 +123,11 @@ def prim(graph, visited_nodes_bool, edge_costs):
 
 
 def mst_cost():
-    """ Uses Prim's Algorithm to calculate the minimum cost spanning tree
+    """ Finds and prints the cost of the sum of all edges in the MST.
     """
     FILE_NAME_1 = 'edges.txt'   # Assigned file, MAX_RANGE = 500
-    FILE_NAME_2 = 'edges_test_1.txt' # Expected answer = -1120098
-    FILE_NAME_3 = 'edges_test_2.txt' # Expected answer = 3
+    FILE_NAME_2 = 'edges_test_1.txt' # Expected answer = -1120098, MAX_RANGE = 400
+    FILE_NAME_3 = 'edges_test_2.txt' # Expected answer = 3, MAX_RANGE = 6
     MAX_RANGE = 500
     chosen_file = FILE_NAME_1
 
@@ -134,7 +136,6 @@ def mst_cost():
     edge_costs = create_edge_costs(chosen_file)
     total_mst_cost = prim(graph, visited_nodes, edge_costs)
     print(total_mst_cost)
-    
 
 
 def main():
