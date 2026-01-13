@@ -31,8 +31,25 @@ def create_node_weights(file_name):
     """ Reads file and returns array containing all node weights
     """
 
+    weights = []
+    first_line = True
+    with open(file_name) as file:
+        for line in file:
+            if first_line:
+                first_line = False
+            else:
+                weights.append(int(line))
+    return weights
+            
 
-def calculate_is_weight():
+def create_is_weights_list(max_range):
+    is_weights = []
+    for i in range(max_range):
+        is_weights.append(None)
+    return is_weights
+
+
+def calculate_is_weight(is_array, weights, optimal_is, max_node):
     """ Recurses on itself to compute the total weight of the optimal IS.
     * Recursively compute max weight IS of G' (one node removed)
     * Recursively compute max weight IS of G'' (two nodes removed) (with first node)
@@ -42,12 +59,21 @@ def calculate_is_weight():
     i.e: A[0] = 0, A[1] = w1, for i = 2,3,...,n, A[i] = max{A[i-1], A[i-2] + wi}.
     """
 
-    # Set array A to empty
-    # Base case - empty graph - return nothing              # TODO: check base cases
-    # Base case - one vertex - return vertex weight in A    # TODO: check base cases
-    # Begin for loop (from i = 2 to i = n)
-        # Recurse on G'
-        # Recurse on G''
+    graph_len = len(weights) - 1
+    prev_calculated_weight = is_array[graph_len - 1]
+    if prev_calculated_weight != None:
+        return prev_calculated_weight
+    elif max_node == graph_len:
+        pass
+    elif max_node == graph_len - 1:
+        is_array[max_node] = weights[max_node]
+    else:
+        for i in range(max_node, graph_len):
+            max_node_one = max_node + 1
+            max_node_two = max_node + 2
+            optimal_is[i] = max(calculate_is_weight(is_array, weights, optimal_is, max_node_one),   # Recurse on G'
+                                    calculate_is_weight(is_array, weights, optimal_is, max_node_two) + weight_i)
+    # TODO: Figure out what to return            
 
 
 def reconstruct_is():
@@ -67,12 +93,20 @@ def reconstruct_is():
     # Return S
 
 
-def output():
+def output(final_is, output_file):
     """ Check if a set of vertices are within the max weight IS    
     """
+    output_array = []
+    with open(output_file) as file:
+        for line in file:
+            vertex = int(line) - 1
+            if final_is[vertex] == True:
+                output_array.append(1)
+            else:
+                output_array.append(0)
 
     # Initialise empty array A
-    # Check if the set vertices are in the max weight IS    # TODO: Create separate file with set vertices to iterate through
+    # Check if the set vertices are in the max weight IS
         # If within max weight IS:
             # Add 1 to an array
         # If not within max weight IS:
@@ -83,6 +117,16 @@ def output():
 def max_weight_is():
     """ Calls other functions
     """
+
+    FILE_NAME_1 = "mwis.txt"            # Assigned file, MAX_RANGE = 1000
+    OUTPUT_FILE_1 = "mwis-vertices.txt" # List of vertices to process in output
+    MAX_RANGE = 1000
+    chosen_file = FILE_NAME_1
+
+    weights = create_node_weights(chosen_file)
+    is_weights = create_is_weights_list(MAX_RANGE)
+    optimal_is = create_is_weights_list(MAX_RANGE)
+    is_array = calculate_is_weight(is_weights, weights, optimal_is, 1)
 
 
 def main():
