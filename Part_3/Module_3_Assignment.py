@@ -65,6 +65,7 @@ def reconstruct_is():
 def output():
     """ Check if a set of vertices are within the max weight IS    
     """
+    
     # Initialise empty array A
     # Check if the set vertices are in the max weight IS    # TODO: Create separate file with set vertices to iterate through
         # If within max weight IS:
