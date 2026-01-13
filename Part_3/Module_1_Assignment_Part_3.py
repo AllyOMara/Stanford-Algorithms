@@ -45,7 +45,6 @@ def create_graph(file_name, max_range):
                 second_node = int(edge_description[1])
                 graph[first_node].append(second_node)
                 graph[second_node].append(first_node) # Added twice - undirected graph
-
     return graph
 
 
@@ -54,6 +53,7 @@ def create_visited_nodes(max_range):
     :param max_range: (Integer) Maximum node value.
     :returns: List of whether nodes are visited or not.
     """
+
     visited_nodes = [True]  # No node '0'
     for i in range(max_range):
         visited_nodes.append(False)
@@ -66,6 +66,7 @@ def create_edge_costs(file_name):
     :param file_name: (String) Name of file with graph.
     :returns: (Dictionary) Edge costs between nodes.
     """
+
     edge_costs = {}
     with open(file_name) as file:
         for line in file:
@@ -125,6 +126,7 @@ def prim(graph, visited_nodes_bool, edge_costs):
 def mst_cost():
     """ Finds and prints the cost of the sum of all edges in the MST.
     """
+    
     FILE_NAME_1 = 'edges.txt'   # Assigned file, MAX_RANGE = 500
     FILE_NAME_2 = 'edges_test_1.txt' # Expected answer = -1120098, MAX_RANGE = 400
     FILE_NAME_3 = 'edges_test_2.txt' # Expected answer = 3, MAX_RANGE = 6
