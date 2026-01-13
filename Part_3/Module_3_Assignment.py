@@ -27,6 +27,11 @@ independent set, and 0 otherwise.
 """
 
 
+def create_node_weights(file_name):
+    """ Reads file and returns array containing all node weights
+    """
+
+
 def calculate_is_weight():
     """ Recurses on itself to compute the total weight of the optimal IS.
     * Recursively compute max weight IS of G' (one node removed)
@@ -65,7 +70,7 @@ def reconstruct_is():
 def output():
     """ Check if a set of vertices are within the max weight IS    
     """
-    
+
     # Initialise empty array A
     # Check if the set vertices are in the max weight IS    # TODO: Create separate file with set vertices to iterate through
         # If within max weight IS:
