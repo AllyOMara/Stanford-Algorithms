@@ -60,20 +60,21 @@ def calculate_is_weight(is_array, weights, optimal_is, max_node):
     """
 
     graph_len = len(weights) - 1
+    weight_i = weights[max_node]
     prev_calculated_weight = is_array[graph_len - 1]
     if prev_calculated_weight != None:
         return prev_calculated_weight
     elif max_node == graph_len:
         pass
     elif max_node == graph_len - 1:
-        is_array[max_node] = weights[max_node]
+        is_array[max_node] = weight_i
     else:
         for i in range(max_node, graph_len):
             max_node_one = max_node + 1
             max_node_two = max_node + 2
             optimal_is[i] = max(calculate_is_weight(is_array, weights, optimal_is, max_node_one),   # Recurse on G'
                                     calculate_is_weight(is_array, weights, optimal_is, max_node_two) + weight_i)
-    # TODO: Figure out what to return            
+    # TODO: FILL OUT CALCULATION OF EVERY SECOND NODE - I.E. FOR I IN RANGE(START, END, 2): ADD UP WEIGHTS, ETC.       
 
 
 def reconstruct_is():
@@ -122,6 +123,7 @@ def max_weight_is():
     OUTPUT_FILE_1 = "mwis-vertices.txt" # List of vertices to process in output
     MAX_RANGE = 1000
     chosen_file = FILE_NAME_1
+    chosen_output = OUTPUT_FILE_1
 
     weights = create_node_weights(chosen_file)
     is_weights = create_is_weights_list(MAX_RANGE)
