@@ -9,7 +9,6 @@ ______________________
 </div>
 <br>
 
-
 ## Parts (Courses)
 [Part 1- Divide and Conquer, Sorting and Searching, and Randomized Algorithms](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_1)<br><br>
 [Part 2 - Graph Search, Shortest Paths, and Data Structures](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_2)<br><br>
@@ -68,4 +67,8 @@ See Module_2_Assignment.py<br>
 - Dijkstra's Algorithm - to find shortest paths from a starting node to ten other nodes.<br>
 - Dictionary usage - to implement 'look-ups' in O(1) time instead of O(n) time.<br>
 - Modified DFS - to check for connected nodes, so unconnected nodes can be ignored.<br>
+<br>
+
+> [!NOTE]  
+> Does not contain solutions to all programming problems, but rather only those relevant to VCE Algorithms Units 3&4.
 <br>
