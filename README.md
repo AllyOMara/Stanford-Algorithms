@@ -1,7 +1,8 @@
 <div align="center">
 
 # Stanford Algorithms Specialization Course Solutions
-##### Learn To Think Like A Computer Scientist. Master the fundamentals of the design and analysis of algorithms.
+##### Learn To Think Like A Computer Scientist. Master the fundamentals of the design and analysis of algorithms. <br>
+Contains solutions to selected programming assignments.
 
 [![Coursera](https://img.shields.io/badge/cousera-blue.svg?style=for-the-badge&logo=coursera)](https://www.coursera.org/specializations/algorithms)
 [![Algorithms Illuminated](https://img.shields.io/badge/Algorithms_Illuminated-darkblue.svg?style=for-the-badge&logo=none)](https://www.algorithmsilluminated.org/)
@@ -67,8 +68,4 @@ See Module_2_Assignment.py<br>
 - Dijkstra's Algorithm - to find shortest paths from a starting node to ten other nodes.<br>
 - Dictionary usage - to implement 'look-ups' in O(1) time instead of O(n) time.<br>
 - Modified DFS - to check for connected nodes, so unconnected nodes can be ignored.<br>
-<br>
-
-> [!NOTE]  
-> Does not contain solutions to all programming problems, but rather only those relevant to VCE Algorithms Units 3&4.
 <br>
