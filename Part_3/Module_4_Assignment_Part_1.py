@@ -23,10 +23,34 @@ def create_item_values(file_name):
     """ Creates and returns array of all item values.
     """
 
+    values = []
+    first_line = True
+    with open(file_name) as file:
+        for line in file:
+            if first_line:
+                first_line = False
+            else:
+                item_description = line.split
+                item_value = item_description[0]
+                values.append(item_value)
+    return values
+
 
 def create_item_weights(file_name):
     """ Creates and returns array of all item weights.
     """
+    
+    weights = []
+    first_line = True
+    with open(file_name) as file:
+        for line in file:
+            if first_line:
+                first_line = False
+            else:
+                item_description = line.split
+                item_weight = item_description[0]
+                weights.append(item_weight)
+    return weights
 
 
 def find_knapsack_size(file_name):
