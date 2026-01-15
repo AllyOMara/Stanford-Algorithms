@@ -62,20 +62,11 @@ def create_is_weights_list(max_range):
 
 
 def calculate_is_weight(is_array, weights, max_node):
-    """ Calculate and return the total weight of the optimal IS. \n
-    
-    Uses recursion to compute the total weight of the optimal IS. Through using
-    an optimised brute force algorithm (i.e. using dynamic programming, through
-    employment of an array to store previously computed values to remove
-    redundant calculations), calculates the optimal IS of smaller subproblems
-    to calculate the optimal IS of the overall problem. Processes is_array to
-    compute weights of optimal subproblems to be used in reconstructing the IS.
-
+    """ Calculate and return the total weight of the optimal IS using dynamic programming.
     Arguments:
         is_array: (Array) Optimal IS sizes (to improve run time).
         weights: (Array) All node weights.
         max_node: (Integer) Represents maximum node value from which recursion occurs.
-    
     Returns:
         (Integer) Optimum weight.
     """
@@ -120,8 +111,12 @@ def calculate_is_weight(is_array, weights, max_node):
 
 
 def reconstruct_is(is_array, weights):
-    """ Uses the array A from calculate_is_weight to output the max weight IS.
-    Scans A from right to left to see which nodes are added to the mas weight IS.
+    """ Reconstructs the set of nodes used in the max weight IS.
+    Arguments:
+        is_array: (Array) Optimal IS sizes.
+        weights: (Array) All node weights.
+    Returns:
+        (Array) Set of nodes used in the max weight IS.
     """
 
     len_weights = len(weights)
@@ -132,17 +127,23 @@ def reconstruct_is(is_array, weights):
     weights.reverse()
     solution = []
     while i >= 1:   
-        if is_array[i - 1] >= (is_array[i - 2] + weights[i]):  # i.e. Case 1 wins
+        if is_array[i - 1] >= (is_array[i - 2] + weights[i]):  # i.e. Case 1 'wins'
             i = i - 1
-        else:  # i.e. Case 2 wins
+        else:  # i.e. Case 2 'wins'
             solution.append(len_weights - i + 1)
             i = i - 2
     return solution
 
 
 def output(final_is, output_file):
-    """ Check if a set of vertices are within the max weight IS    
+    """ Finds whether assigned nodes were in the max weight IS.   
+    Arguments:
+        final_is: (Array) Set of nodes used in the max weight IS.
+        output_file: (String) File name where the final contains vertices.
+    Returns:
+        (List) Final list indicating the presence (1) or absence (0) of particular nodes.
     """
+
     output_array = []
     with open(output_file) as file:
         for line in file:
@@ -155,7 +156,7 @@ def output(final_is, output_file):
 
 
 def max_weight_is():
-    """ Calls other functions
+    """ Uses a dynamic programming algorithm to find the max weight IS.
     """
 
     sys.setrecursionlimit(1000000)
