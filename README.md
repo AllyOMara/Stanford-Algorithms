@@ -1,7 +1,8 @@
 <div align="center">
 
 # Stanford Algorithms Specialization Course Solutions
-##### Learn To Think Like A Computer Scientist. Master the fundamentals of the design and analysis of algorithms.
+##### Learn To Think Like A Computer Scientist. Master the fundamentals of the design and analysis of algorithms. <br>
+Contains solutions to selected programming assignments.
 
 [![Coursera](https://img.shields.io/badge/cousera-blue.svg?style=for-the-badge&logo=coursera)](https://www.coursera.org/specializations/algorithms)
 [![Algorithms Illuminated](https://img.shields.io/badge/Algorithms_Illuminated-darkblue.svg?style=for-the-badge&logo=none)](https://www.algorithmsilluminated.org/)
@@ -40,7 +41,7 @@ See Module_2_Assignment.py<br>
 ### [Optimised QuickSort](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_1)<br>
 QuickSort, where the pivot is chosen as the median of three elements (the first, middle, and last element in an array).<br>
 Counts number of comparisons made between elements in an array.<br>
-The aim of choosing the median of three elements increases the chance of an optimal 25-75 split (which is 'good enough for O(nlogn)').<br>
+The aim of choosing the median of three elements increases the chance of an optimal 25-75 split (which is 'good enough for $O(nlogn)$').<br>
 See Module_3_Assignment_Part_3.py<br>
 #### Key Implementations
 - QuickSort - sorting of an array in non-decreasing order.<br>
@@ -56,7 +57,7 @@ See Module_1_Assignment.py<br>
 - Setting recursion limit - using import sys.<br>
 - Modified Insertion Sort - limits array size to 5, buts keeps the array sorted.<br>
 - Depth-First Search (DFS) usage to search for SCCS.<br>
-- Usage of if __name__ == "__main__" and main() function.<br>
+- Usage of `if __name__ == "__main__"` and main() function.<br>
 - Docstring usage.<br>
 
 ### [Dijkstra's Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_2)<br>
@@ -65,10 +66,6 @@ Finds and prints the shortest path from the start node (1) to ten other nodes (7
 See Module_2_Assignment.py<br>
 #### Key Implementations
 - Dijkstra's Algorithm - to find shortest paths from a starting node to ten other nodes.<br>
-- Dictionary usage - to implement 'look-ups' in O(1) time instead of O(n) time.<br>
+- Dictionary usage - to implement 'look-ups' in $O(1)$ time instead of $O(n)$ time.<br>
 - Modified DFS - to check for connected nodes, so unconnected nodes can be ignored.<br>
-<br>
-
-> [!NOTE]  
-> Does not contain solutions to all programming problems, but rather only those relevant to VCE Algorithms Units 3&4.
 <br>
