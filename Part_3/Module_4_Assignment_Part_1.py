@@ -45,13 +45,13 @@ def create_knapsack_array(max_items, knapsack_size):
     """
 
 
-def find_knapsack_value(knapsack_array, item_values, item_weights):
+def find_knapsack_value(knapsack_array, item_values, item_weights, knapsack_size):
     """ Finds and returns the value of the optimal solution.
     """
 
 
 def knapsack():
-    """ Knapsack dynamic programming algorithm used to find the optimal solution to the knapsack problem.
+    """ Knapsack algorithm used to find the optimal solution.
     """
 
 
