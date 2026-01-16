@@ -15,11 +15,11 @@ Note that "sum of weighted completion times" can be described as the following: 
 - Reading data from a file.<br>
 
 ### [Module 1 - Part 3: Prim's Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_1/Module_3_Assignment_Part_3.py)<br>
-Prim's Algorithm, which produces a minimum spanning tree (MST) using a greedy approach.<br>
-Finds overall cost of the MST.<br>
+Prim's minimum spanning tree (MST) algorithm, used for finding the minimum cost spanning tree in a graph.<br>
+Finds and prints the overall cost of the MST.<br>
 #### Key Implementations
-- Prim's Algorithm.<br>
-- Dictionary usage.<br>
+- Prim's Algorithm - to find the cost of the MST in a graph.<br>
+- Dictionary usage - to implement 'look-ups' in $O(1)$ time instead of $O(n)$ time.<br>
 <br>
 
 ## References
