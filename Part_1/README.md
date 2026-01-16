@@ -34,7 +34,3 @@ Useful resources on learning the Python programming language and designing and i
 - [Coursera- Stanford University Algorithms Specialization Course](https://www.coursera.org/specializations/algorithms)<br><br>
 - [An Introduction to Algorithmic Thinking](https://www.lulu.com/shop/georgia-gouros/an-introduction-to-algorithmic-thinking-algorithmics-hess-student-guide/paperback/product-mnvzpy.html?page=1&pageSize=4)<br><br>
 <br>
-
-> [!NOTE]  
-> Does not contain solutions to all programming problems, but rather only those relevant to VCE Algorithms Units 3&4.
-<br>
