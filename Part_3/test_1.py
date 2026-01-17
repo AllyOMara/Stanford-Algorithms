@@ -8,7 +8,6 @@ Contains 4 test cases.
 import Module_4_Assignment_Part_1 as module
 
 
-
 def test_find_knapsack_value():
     
     assert module.find_knapsack_value([[0, 0, 0, 0, 0, 0], [None, None, None, None, None, None,], [None, None, None, None, None, None,],
