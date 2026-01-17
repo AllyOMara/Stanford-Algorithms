@@ -68,4 +68,12 @@ See Module_2_Assignment.py<br>
 - Dijkstra's Algorithm - to find shortest paths from a starting node to ten other nodes.<br>
 - Dictionary usage - to implement 'look-ups' in $O(1)$ time instead of $O(n)$ time.<br>
 - Modified DFS - to check for connected nodes, so unconnected nodes can be ignored.<br>
+
+### [Prim's MST Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_3)<br>
+Prim's minimum spanning tree (MST) algorithm, used for finding the minimum cost spanning tree in a graph.<br>
+Finds and prints the overall cost of the MST.<br>
+See Part_3/Module_1_Assignment_Part_3.py<br>
+#### Key Implementations
+- Prim's Algorithm - to find the cost of the MST in a graph.<br>
+- Dictionary usage - to implement 'look-ups' in $O(1)$ time instead of $O(n)$ time.<br>
 <br>

@@ -15,11 +15,11 @@ Note that "sum of weighted completion times" can be described as the following: 
 - Reading data from a file.<br>
 
 ### [Module 1 - Part 3: Prim's Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_1/Module_3_Assignment_Part_3.py)<br>
-Prim's Algorithm, which produces a minimum spanning tree (MST) using a greedy approach.<br>
-Finds overall cost of the MST.<br>
+Prim's minimum spanning tree (MST) algorithm, used for finding the minimum cost spanning tree in a graph.<br>
+Finds and prints the overall cost of the MST.<br>
 #### Key Implementations
-- Prim's Algorithm.<br>
-- Dictionary usage.<br>
+- Prim's Algorithm - to find the cost of the MST in a graph.<br>
+- Dictionary usage - to implement 'look-ups' in $O(1)$ time instead of $O(n)$ time.<br>
 <br>
 
 ## References
@@ -29,9 +29,4 @@ Useful resources on learning the Python programming language and designing and i
 - [Introduction to Algorithms *3rd Ed*](https://www.amazon.com.au/Introduction-Algorithms-Thomas-Dartmouth-College/dp/0262033844)<br><br>
 - [Mathematics for Computer Science](https://www.amazon.com.au/Mathematics-Computer-Science-Lehman-Eric/dp/9888407066)<br><br>
 - [Coursera- Stanford University Algorithms Specialization Course](https://www.coursera.org/specializations/algorithms)<br><br>
-- [An Introduction to Algorithmic Thinking](https://www.lulu.com/shop/georgia-gouros/an-introduction-to-algorithmic-thinking-algorithmics-hess-student-guide/paperback/product-mnvzpy.html?page=1&pageSize=4)<br><br>
-<br>
-
-> [!NOTE]  
-> Does not contain solutions to all programming problems, but rather only those relevant to VCE Algorithms Units 3&4.
 <br>
