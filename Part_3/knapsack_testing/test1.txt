@@ -1,6 +1,0 @@
->>> knapsack_array = [[Null, Null, Null, Null, Null], [Null, Null, Null, Null, Null], [Null, Null, Null, Null, Null]]
->>> knapsack_size = 5
->>> item_weights = [3, 2, 1]
->>> item values = [1, 2, 3]
-
-5
