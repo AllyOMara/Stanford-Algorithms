@@ -20,7 +20,6 @@ Finds and prints the overall cost of the MST.<br>
 #### Key Implementations
 - Prim's Algorithm - to find the cost of the MST in a graph.<br>
 - Dictionary usage - to implement 'look-ups' in $O(1)$ time instead of $O(n)$ time.<br>
-<br>
 
 ### [Module 1 - Part 4: Knapsack Problem](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_3/Module_4_Assignment_Part_1.py)<br>
 Dynamic programming algorithm used to find an optimal solution to the Knapsack Problem.<br>
