@@ -22,6 +22,15 @@ Finds and prints the overall cost of the MST.<br>
 - Dictionary usage - to implement 'look-ups' in $O(1)$ time instead of $O(n)$ time.<br>
 <br>
 
+### [Module 1 - Part 4: Knapsack Problem](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_3/Module_4_Assignment_Part_1.py)<br>
+Dynamic programming algorithm used to find an optimal solution to the Knapsack Problem.<br>
+Finds and prints the overall value of the optimum knapsack.<br>
+#### Key Implementations
+- Dynamic programming usage.<br>
+- Usage of a testing file - using pytest.<br>
+<br>
+
+
 ## References
 Useful resources on learning the Python programming language and designing and implementation of algorithms can be found below.
 - [Algorithms Illuminated](https://www.algorithmsilluminated.org/)<br><br>
