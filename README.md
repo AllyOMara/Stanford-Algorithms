@@ -77,7 +77,7 @@ See Module_1_Assignment_Part_3.py<br>
 - Prim's Algorithm - to find the cost of the MST in a graph.<br>
 - Dictionary usage - to implement 'look-ups' in $O(1)$ time instead of $O(n)$ time.<br>
 
-### [Knapsack Problem](https://github.com/AllyOMara/Stanford-Algorithms/blob/main/Part_3/Module_4_Assignment_Part_1.py)<br>
+### [Knapsack Problem](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_3)<br>
 Dynamic programming algorithm used to find an optimal solution to the Knapsack Problem.<br>
 Finds and prints the overall value of the optimum knapsack.<br>
 See Module_4_Assignment_Part_1.py
