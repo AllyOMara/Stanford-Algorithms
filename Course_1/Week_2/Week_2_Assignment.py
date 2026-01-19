@@ -1,5 +1,5 @@
 '''
-Stanford Algorithms - Course 1 Module 2
+Stanford Algorithms - Course 1 Week 2
 Programming Assignment
 
 Solution by Alexandria O'Mara
