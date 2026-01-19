@@ -28,13 +28,3 @@ Finds and prints the overall value of the optimum knapsack.<br>
 - Dynamic programming usage.<br>
 - Usage of a testing file - using pytest.<br>
 <br>
-
-
-## References
-Useful resources on learning the Python programming language and designing and implementation of algorithms can be found below.
-- [Algorithms Illuminated](https://www.algorithmsilluminated.org/)<br><br>
-- [Learning Python *5th Ed*](https://www.amazon.com.au/Learning-Python-Mark-Lutz/dp/1449355730)<br><br>
-- [Introduction to Algorithms *3rd Ed*](https://www.amazon.com.au/Introduction-Algorithms-Thomas-Dartmouth-College/dp/0262033844)<br><br>
-- [Mathematics for Computer Science](https://www.amazon.com.au/Mathematics-Computer-Science-Lehman-Eric/dp/9888407066)<br><br>
-- [Coursera- Stanford University Algorithms Specialization Course](https://www.coursera.org/specializations/algorithms)<br><br>
-<br>
