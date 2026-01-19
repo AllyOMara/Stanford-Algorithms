@@ -5,7 +5,7 @@ Contains 4 test cases.
 
 """
 
-import Module_4_Assignment_Part_1 as module
+import Week_4_Assignment_Part_1 as module
 
 
 def test_find_knapsack_value():
