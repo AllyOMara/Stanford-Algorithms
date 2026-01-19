@@ -72,8 +72,16 @@ See Module_2_Assignment.py<br>
 ### [Prim's MST Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_3)<br>
 Prim's minimum spanning tree (MST) algorithm, used for finding the minimum cost spanning tree in a graph.<br>
 Finds and prints the overall cost of the MST.<br>
-See Part_3/Module_1_Assignment_Part_3.py<br>
+See Module_1_Assignment_Part_3.py<br>
 #### Key Implementations
 - Prim's Algorithm - to find the cost of the MST in a graph.<br>
 - Dictionary usage - to implement 'look-ups' in $O(1)$ time instead of $O(n)$ time.<br>
+
+### [Knapsack Problem](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_3)<br>
+Dynamic programming algorithm used to find an optimal solution to the Knapsack Problem.<br>
+Finds and prints the overall value of the optimum knapsack.<br>
+See Module_4_Assignment_Part_1.py
+#### Key Implementations
+- Dynamic programming usage.<br>
+- Usage of a testing file - using pytest.<br>
 <br>
