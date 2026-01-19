@@ -1,4 +1,4 @@
-# Part 1
+# Course 1
 
 ## Overview
 Part 1 of Algorithms Specialization. Divide and Conquer, Sorting and Searching, and Randomized Algorithms.<br><br>

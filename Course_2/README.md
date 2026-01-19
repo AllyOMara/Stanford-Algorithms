@@ -1,4 +1,4 @@
-# Part 2
+# Course 2
 
 ## Overview
 Part 2 of Algorithms Specialization. Graph Search, Shortest Paths, and Data Structures.<br><br>

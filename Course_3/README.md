@@ -1,4 +1,4 @@
-# Part 3
+# Course 3
 
 ## Overview
 Part 3 of Algorithms Specialization. Greedy Algorithms, Minimum Spanning Trees, and Dynamic Programming.<br><br>
