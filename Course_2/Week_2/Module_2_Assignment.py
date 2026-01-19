@@ -1,5 +1,5 @@
 '''
-Stanford Algorithms - Part 2 Module 2
+Stanford Algorithms - Course 2 Module 2
 Programming Assignment
 
 Solution by Alexandria O'Mara

@@ -1,12 +1,17 @@
 '''
-                                        TASK:
-    Implement one or more of the integer multiplication algorithms described
-    in the lectures to find the product of the following 64-digit numbers:
-    3141592653589793238462643383279502884197169399375105820974944592
-    2718281828459045235360287471352662497757247093699959574966967627
+Stanford Algorithms - Course 1 Module 1
+Programming Assignment
 
-    NOTE: I used the Karatsuba Multiplication method (only works for two 
-    even-digit numbers of the same length)
+Solution by Alexandria O'Mara
+
+TASK
+Implement one or more of the integer multiplication algorithms described
+in the lectures to find the product of the following 64-digit numbers:
+3141592653589793238462643383279502884197169399375105820974944592
+2718281828459045235360287471352662497757247093699959574966967627
+
+NOTE: I used the Karatsuba Multiplication method (only works for two 
+even-digit numbers of the same length)
 '''
 
 number1 = input("What is the first number? ") # Using user input instead of pre-defined numbers
