@@ -28,37 +28,135 @@ def get_edge_weights(file_name):
     Dictionary structure: dictionary[node_one][node_two] = edge weight
     """
 
+    weights = {}
+    first_line = True
+    with open(file_name) as file:
+        for line in file:
+            if first_line:
+                first_line = False
+            else:
+                edge_description = line.split()
+                node_1 = int(edge_description[0])
+                node_2 = int(edge_description[1])
+                weight = int(edge_description[2])
+                weights.update({node_1 : {node_2 : weight}})
+                weights.update({node_2 : {node_1 : weight}})
+    return weights
+
 
 def get_number_of_nodes(file_name):
     """ Reads file and returns the number of nodes.
     """
 
+    first_line = True
+    number_of_nodes = None
+    with open(file_name) as file:
+        for line in file:
+            if first_line:
+                description = line.split()
+                number_of_nodes = int(description[0])
+                return number_of_nodes
+
+
+def get_graph(file_name, number_of_nodes):
+    """ Reads file to create adjacency list of all child nodes.
+    """
+
+    graph = []
+    for i in range(number_of_nodes + 1):
+        graph.append([])
+    first_line = True
+    with open(file_name) as file:
+        for line in file:
+            if first_line:
+                first_line = False
+            else:
+                edge_description = line.split()
+                node_1 = int(edge_description[0])
+                node_2 = int(edge_description[1])
+                graph[node_1].append(node_2)
+                graph[node_2].append(node_1)
+    return graph
+
+
 
 def create_shortest_paths_array(number_of_nodes):
     """ Creates and returns a 3-Dimensional array.
-    number_of_nodes x number_of_nodes x number_of_nodes
+    number_of_nodes + 1 x number_of_nodes x number_of_nodes
     """
 
+    shortest_paths_array = []
+    for i in range(number_of_nodes + 2):
+        shortest_paths_array.append([])
+        for j in range(number_of_nodes + 1):
+            shortest_paths_array[i].append([])
+            for k in range(number_of_nodes + 1):
+                shortest_paths_array[i][j].append(None)
+    return shortest_paths_array
 
-def floyd_warshall(edge_weights, number_of_nodes):
+
+def floyd_warshall(edge_weights, number_of_nodes, shortest_paths_array, graph):
     """ Uses the Floyd-Warshall algorithm to compute all-pairs shortest paths.
     Computes and returns shortest shortest path.
     """
+    
+    shortest_path = 0
+
+    # Base case
+    for i in range(number_of_nodes + 1):
+        for j in range(number_of_nodes + 1):
+            for k in range(number_of_nodes + 1):
+                i_child_nodes = graph[i]
+                if j in i_child_nodes:
+                    weight = edge_weights[i][j]
+                else:
+                    weight = None
+                if i == j:
+                    shortest_paths_array[i][j][k] = 0
+                elif weight != None:
+                    shortest_paths_array[i][j][k] = weight
+
+    # Solving subproblems
+    for k in range(1, number_of_nodes + 1):
+        for i in range(1, number_of_nodes + 1):
+            for j in range(1, number_of_nodes + 1):
+                case_1 = shortest_paths_array[i][k][k - 1]
+                case_2_part_1 = shortest_paths_array[i][k][k - 1]
+                case_2_part_2 = shortest_paths_array[k][j][k - 1]
+                if (case_2_part_1 == None) or (case_2_part_2 == None):
+                    case_2 = case_1
+                elif case_1 == None:
+                    case_2 = case_2_part_1 + case_2_part_2
+                    case_1 = case_2
+                else:
+                    case_2 = case_2_part_1 + case_2_part_2
+                path_length = min(case_1, case_2)
+                shortest_paths_array[i][j][k] = path_length
+                if path_length < shortest_path:
+                    shortest_path = path_length
+    # Checking for negative cycle
+    for parent_node in range(1, number_of_nodes + 1):
+        if shortest_paths_array[parent_node][parent_node][number_of_nodes + 1] < 0:
+            return "NULL"
+    return shortest_path
+
+
 
 
 def shortest_shortest_path():
-    """ Algorithm used to find the shortest shortest path
+    """ Algorithm used to find the shortest shortest path.
     """
+
 
 
 """
 TO DO:
-x. Make test cases <-- priority
 x. Fill out functions
 
 ~~~
 
 Completed
 x. Make skeleton
+x. Make test cases
 
 """
