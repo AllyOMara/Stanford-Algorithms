@@ -34,7 +34,13 @@ def get_number_of_nodes(file_name):
     """
 
 
-def floyd_warshall(edge_weights):
+def create_shortest_paths_array(number_of_nodes):
+    """ Creates and returns a 3-Dimensional array.
+    number_of_nodes x number_of_nodes x number_of_nodes
+    """
+
+
+def floyd_warshall(edge_weights, number_of_nodes):
     """ Uses the Floyd-Warshall algorithm to compute all-pairs shortest paths.
     Computes and returns shortest shortest path.
     """
