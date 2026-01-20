@@ -13,5 +13,12 @@ three graphs have the structure:
 [first_vertex] [second_vertex] [edge_length]
 ...
 
+Your task is to compute the "shortest shortest path". Precisely, you must first
+identify which, if any, of the three graphs have no negative cycles.
 
+For each such graph, you should compute all-pairs shortest paths and remember
+the smallest one.
+
+You can use whatever algorithm you like to solve this question.
 """
+
