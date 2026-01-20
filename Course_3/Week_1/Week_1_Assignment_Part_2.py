@@ -1,5 +1,5 @@
 '''
-Stanford Algorithms - Part 3 Module 1
+Stanford Algorithms - Course 3 Week 1
 Programming Assignment
 
 Solution by Alexandria O'Mara
@@ -16,16 +16,15 @@ For example, the third line of the file is "74 59", indicating
 that the second job has weight 74 and length 59. You should
 NOT assume that edge weights or lengths are distinct.
 
-Run the greedy algorithm that schedules jobs in decreasing
-order of the difference (weight - length). Recall from lecture
-that this algorithm is not always optimal. 
+Run the greedy algorithm that schedules jobs (optimally) in
+decreasing order of the ratio (weight/length). You should
+report the sum of weighted completion times of the resulting
+schedule.
 
-IMPORTANT: if two jobs have equal difference (weight - length),
-you should schedule the job with higher weight first. 
-Report the sum of weighted completion times of the resulting
-schedule - a positive integer.
+IMPORTANT: It does not matter how you break ties. 
 '''
 
+import sys
 
 def find_median(first, middle, last):
     """ Finds and returns the median of three inputted values.
@@ -56,7 +55,7 @@ def quick_sort(array):
     len_array = len(array)
     if len_array == 1:
         return array
-    
+
     first_index   = 0
     last_index    = len_array - 1
     if len_array % 2 == 1:
@@ -77,19 +76,17 @@ def quick_sort(array):
     else:
         pivot_index = last_index
 
-    # Partition
-    i = 1   # Index where elements less than the pivot ends
+    i = 1 # Index where elements less than the pivot ends
     pivot_array = [array[pivot_index]]
-    array[pivot_index], array[0] = array[0], array[pivot_index] # Swaps pivot element with the first element
+    array[pivot_index], array[0] = array[0], array[pivot_index] # Swaps first and pivot element
 
     for j in range(1, len_array):
         if array[0] > array[j]:
             array[i], array[j] = array[j], array[i]
             i = i + 1
-    
+
     array[i - 1], array[0] = array[0], array[i - 1] # "Puts" pivot in place
 
-    # Recursion
     left    = array[:i - 1]
     right   = array[i:]
     if len(left) > 1:
@@ -97,18 +94,15 @@ def quick_sort(array):
     if len(right) > 1:
         right = quick_sort(right)
 
-    # Combine into final array
     array = left + pivot_array + right
     
     return(array)
 
 
 def calculate_job_keys(file_name):
-    """ Find each job's key (weight - length). Return array containing all keys.
-
-    Reads the given file (file_name), and generates the key for each job. The
-    key can be defined as weight minus length, and is used in this greedy
-    algorithm to determine the final job ordering.
+    """ Finds each job's key (weight / length). Returns array containing all keys.
+    :param file_name: (String) Name of file with job descriptions.
+    :returns: (Array) All keys in order of job numbering.
     """
 
     job_keys = []
@@ -118,45 +112,38 @@ def calculate_job_keys(file_name):
             if len(job_description) == 2:
                 job_weight = int(job_description[0])
                 job_length = int(job_description[1])
-                job_key = int(job_weight - job_length)
+                job_key = job_weight / job_length
                 job_keys.append(job_key)
     return job_keys
 
 
-def create_key_to_job_dict(job_keys, file_name):
-    """ Loop through job_keys (array), adding the job associated with each key
-    to a dictionary.
-
-    The given array (job_keys) is looped through (for i in ...) and each
-    iteration adds a new entry into the dictionary. The dictionary is later
-    used to determine ordering in the greedy algorithm.
+def create_key_to_job_dict(file_name):
+    """ Adds keys (weight / length) to a dictionary, where the jobs are the values.
+    :param file_name: (String) Name of file with job descriptions.
+    :returns: (Dictionary) Key : jobs pairs.
     """
-    
+
     dictionary = {}
     line_number = 0
-
     with open(file_name) as file:
         for line in file:
             job_description = line.split()
             if len(job_description) > 1:
                 job_weight = (int(job_description[0]))
                 job_length = (int(job_description[1]))
-                job_key = int(job_weight - job_length)
+                job_key = job_weight / job_length
                 line_number = line_number + 1
                 if job_key not in dictionary:
                     dictionary.update({job_key : [line_number]})
                 else:
                     dictionary[job_key].append(line_number)
-    
     return dictionary
-            
-    
+
 
 def create_weights_list(file_name):
-    """ List of weights of all jobs. Returned in an array.
-
-    Used to resolve 'ties' in keys by scheduling the job with the higher weight
-    before the job with the lower weight. Returns all job weights in an array.
+    """ Finds weights of all jobs. Returns in an array.
+    :param file_name: (String) Name of file with job descriptions.
+    :returns: (Array) Weight of all jobs in an array (index represents job number).
     """
 
     weights_list = []
@@ -171,8 +158,9 @@ def create_weights_list(file_name):
 
 
 def create_lengths_list(file_name):
-    """ List of lengts of all jobs. Returned in an array.
-    Used to calculate completion times.
+    """ Finds lengths of all jobs. Returns in an array.
+    :param file_name: (String) Name of file with job descriptions.
+    :returns: (Array) Length of all jobs in an array (index represents job number).
     """
 
     lengths_list = []
@@ -184,13 +172,14 @@ def create_lengths_list(file_name):
             else:
                 lengths_list.append(0)
     return lengths_list
-            
 
 
-def calculate_schedule(key_to_job_dict,
-                       weights_list,
-                       sorted_keys):
-    """ Returns the final schedule of jobs based on their keys.
+def calculate_schedule(key_to_job_dict, weights, sorted_keys):
+    """ Calculates and returns the final schedule of jobs based on their keys.
+    :param key_to_job_dict: (Dictionary) Key : jobs pairs where jobs is a list.
+    :param weights: (Array) Weight of all jobs.
+    :param sorted_keys: (Array) All keys in non-descending order.
+    :returns: (Array) Final schedule of jobs.
     """
 
     visited_keys = []
@@ -206,7 +195,7 @@ def calculate_schedule(key_to_job_dict,
             else:
                 while len(jobs) > 0:
                     for i in range(len(jobs)):
-                        possible_job_weight = weights_list[(jobs[i])]
+                        possible_job_weight = weights[(jobs[i])]
                         if i == 0:
                             job = jobs[i]
                             job_index = 0
@@ -222,10 +211,11 @@ def calculate_schedule(key_to_job_dict,
 
 
 def calculate_completion_time(job_schedule, weights, lengths):
-    """ Returns the final answer (the sum of weighted completion times).
-
-    Uses final_schedule to calculate the sum of weighted completion times, which
-    is returned.
+    """ Calculates and returns the final answer (sum of weighted completion times).
+    :param job_schedule: (Array) Final schedule of jobs.
+    :param weights: (Array) Weight of all jobs.
+    :param lengths: (Array) Lengths of all jobs.
+    :returns: (Integer) Sum of weighted completion times.
     """
 
     completion_time = 0
@@ -242,29 +232,20 @@ def calculate_completion_time(job_schedule, weights, lengths):
 
 def greedy():
     """ Greedy algorithm used to generate the final scheduling order of jobs.
-
-    Main while loop (while length of scheduled jobs != max_range) to schedule
-    jobs in a close-to-optimal ordering. Prints final schedule.
-    If there is a clash between keys, choose the job with the highest weight 
-    before the job of the lowest weight.
     """
-    
+    sys.setrecursionlimit(1000000)
     FILE_NAME_1 = 'jobs.txt'
     FILE_NAME_2 = 'jobs_test_1.txt' # Final answer = 1147
     FILE_NAME_3 = 'jobs_test_2.txt' # Final answer = 1175612
-    
     chosen_file = FILE_NAME_1
 
     job_keys = calculate_job_keys(chosen_file)
-    print(job_keys)
-    key_to_job_dict = create_key_to_job_dict(job_keys, chosen_file)
+    key_to_job_dict = create_key_to_job_dict(chosen_file)
     weights = create_weights_list(chosen_file)
     lengths = create_lengths_list(chosen_file)
     sorted_keys = quick_sort(job_keys)
     job_schedule = calculate_schedule(key_to_job_dict, weights, sorted_keys)
-    print(job_schedule)
     completion_time = calculate_completion_time(job_schedule, weights, lengths)
-
     print(completion_time)
 
 
