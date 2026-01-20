@@ -22,3 +22,37 @@ the smallest one.
 You can use whatever algorithm you like to solve this question.
 """
 
+
+def get_edge_weights(file_name):
+    """ Reads file to retrieve edge weights, which are put into a dictionary.
+    Dictionary structure: dictionary[node_one][node_two] = edge weight
+    """
+
+
+def get_number_of_nodes(file_name):
+    """ Reads file and returns the number of nodes.
+    """
+
+
+def floyd_warshall(edge_weights):
+    """ Uses the Floyd-Warshall algorithm to compute all-pairs shortest paths.
+    Computes and returns shortest shortest path.
+    """
+
+
+def shortest_shortest_path():
+    """ Algorithm used to find the shortest shortest path
+    """
+
+
+"""
+TO DO:
+x. Make test cases <-- priority
+x. Fill out functions
+
+~~~
+
+Completed
+x. Make skeleton
+
+"""
