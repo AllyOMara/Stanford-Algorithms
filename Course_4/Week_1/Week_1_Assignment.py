@@ -39,8 +39,18 @@ def get_edge_weights(file_name):
                 node_1 = int(edge_description[0])
                 node_2 = int(edge_description[1])
                 weight = int(edge_description[2])
-                weights.update({node_1 : {node_2 : weight}})
-                weights.update({node_2 : {node_1 : weight}})
+                child_description_1 = {node_1: weight}
+                child_description_2 = {node_2: weight}
+                
+                if node_1 not in weights:
+                    weights.update({node_1: {node_2: weight}})
+                else:
+                    weights[node_1].update({node_2: weight})
+                if node_2 not in weights:
+                    weights.update({node_2: {node_1: weight}})
+                else:
+                    weights[node_2].update({node_1: weight})
+
     return weights
 
 
@@ -124,8 +134,9 @@ def floyd_warshall(edge_weights, number_of_nodes, shortest_paths_array, graph):
                 case_2_part_1 = shortest_paths_array[i][k][k - 1]
                 case_2_part_2 = shortest_paths_array[k][j][k - 1]
                 if (case_2_part_1 == None) or (case_2_part_2 == None):
-                    case_2 = case_1
-                elif case_1 == None:
+                    case_2 = None
+                else:
+                    case_1 = None
                     case_2 = case_2_part_1 + case_2_part_2
                     case_1 = case_2
                 else:
