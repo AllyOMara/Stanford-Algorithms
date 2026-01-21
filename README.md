@@ -14,6 +14,7 @@ ______________________
 [Course 1- Divide and Conquer, Sorting and Searching, and Randomized Algorithms](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_1)<br><br>
 [Course 2 - Graph Search, Shortest Paths, and Data Structures](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_2)<br><br>
 [Course 3 - Greedy Algorithms, Minimum Spanning Trees, and Dynamic Programming](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_3)<br><br>
+[Course 4 - Shortest Paths Revisited, NP-Complete Problems and What To Do About Them](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Course_4)<br><br>
 <br>
 
 ## References
