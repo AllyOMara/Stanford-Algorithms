@@ -39,18 +39,10 @@ def get_edge_weights(file_name):
                 node_1 = int(edge_description[0])
                 node_2 = int(edge_description[1])
                 weight = int(edge_description[2])
-                child_description_1 = {node_1: weight}
-                child_description_2 = {node_2: weight}
-                
                 if node_1 not in weights:
                     weights.update({node_1: {node_2: weight}})
                 else:
                     weights[node_1].update({node_2: weight})
-                if node_2 not in weights:
-                    weights.update({node_2: {node_1: weight}})
-                else:
-                    weights[node_2].update({node_1: weight})
-
     return weights
 
 
@@ -85,12 +77,11 @@ def get_graph(file_name, number_of_nodes):
                 node_1 = int(edge_description[0])
                 node_2 = int(edge_description[1])
                 graph[node_1].append(node_2)
-                graph[node_2].append(node_1)
     return graph
 
 
 
-def create_shortest_paths_array(number_of_nodes):
+def create_shortest_paths_array(number_of_nodes, graph, edge_weights):
     """ Creates and returns a 3-Dimensional array.
     number_of_nodes + 1 x number_of_nodes x number_of_nodes
     """
@@ -109,55 +100,63 @@ def floyd_warshall(edge_weights, number_of_nodes, shortest_paths_array, graph):
     """ Uses the Floyd-Warshall algorithm to compute all-pairs shortest paths.
     Computes and returns shortest shortest path.
     """
-    
+
     shortest_path = 0
 
     # Base case
     for i in range(number_of_nodes + 1):
         for j in range(number_of_nodes + 1):
-            for k in range(number_of_nodes + 1):
-                i_child_nodes = graph[i]
-                if j in i_child_nodes:
-                    weight = edge_weights[i][j]
-                else:
-                    weight = None
-                if i == j:
-                    shortest_paths_array[i][j][k] = 0
-                elif weight != None:
-                    shortest_paths_array[i][j][k] = weight
+            i_child_nodes = graph[i]
+            if j in i_child_nodes:
+                weight = edge_weights[i][j]
+            else:
+                weight = None
+            if i == j:
+                shortest_paths_array[i][j][0] = 0
+            else:
+                shortest_paths_array[i][j][0] = weight
 
     # Solving subproblems
     for k in range(1, number_of_nodes + 1):
         for i in range(1, number_of_nodes + 1):
             for j in range(1, number_of_nodes + 1):
-                case_1 = shortest_paths_array[i][k][k - 1]
+                case_1 = shortest_paths_array[i][j][k - 1]
                 case_2_part_1 = shortest_paths_array[i][k][k - 1]
                 case_2_part_2 = shortest_paths_array[k][j][k - 1]
+
                 if (case_2_part_1 == None) or (case_2_part_2 == None):
                     case_2 = None
                 else:
-                    case_1 = None
                     case_2 = case_2_part_1 + case_2_part_2
-                    case_1 = case_2
-                else:
-                    case_2 = case_2_part_1 + case_2_part_2
-                path_length = min(case_1, case_2)
+
+                if (case_1 == None) and (case_2 == None):  # Both are None
+                    path_length = None
+                elif (case_1 != None) and (case_2 == None):  # case_1 is not None
+                    path_length = case_1
+                elif (case_1 == None) and (case_2 != None):  # case_2 is not None
+                    path_length = case_2
+                else:  # Both cases are not None
+                    path_length = min(case_1, case_2)
+
                 shortest_paths_array[i][j][k] = path_length
-                if path_length < shortest_path:
-                    shortest_path = path_length
+
+                if path_length != None:
+                    if path_length < shortest_path:
+                        shortest_path = path_length
+
     # Checking for negative cycle
-    for parent_node in range(1, number_of_nodes + 1):
-        if shortest_paths_array[parent_node][parent_node][number_of_nodes + 1] < 0:
-            return "NULL"
+    for node in range(1, number_of_nodes + 1):
+        for n in range(1, number_of_nodes + 1):
+            diagonal_value = shortest_paths_array[node][node][n]
+            if diagonal_value != None:
+                if diagonal_value < 0:
+                    return "NULL"
     return shortest_path
-
-
 
 
 def shortest_shortest_path():
     """ Algorithm used to find the shortest shortest path.
     """
-
 
 
 """
