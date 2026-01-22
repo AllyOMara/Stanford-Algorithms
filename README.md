@@ -11,9 +11,9 @@ ______________________
 <br>
 
 ## Courses
-[Course 1- Divide and Conquer, Sorting and Searching, and Randomized Algorithms](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_1)<br><br>
-[Course 2 - Graph Search, Shortest Paths, and Data Structures](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_2)<br><br>
-[Course 3 - Greedy Algorithms, Minimum Spanning Trees, and Dynamic Programming](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_3)<br><br>
+[Course 1- Divide and Conquer, Sorting and Searching, and Randomized Algorithms](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Course_1)<br><br>
+[Course 2 - Graph Search, Shortest Paths, and Data Structures](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Course_2)<br><br>
+[Course 3 - Greedy Algorithms, Minimum Spanning Trees, and Dynamic Programming](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Course_3)<br><br>
 [Course 4 - Shortest Paths Revisited, NP-Complete Problems and What To Do About Them](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Course_4)<br><br>
 <br>
 
@@ -29,7 +29,7 @@ Useful resources on learning the Python programming language and designing and i
 
 ## Notable Implementations
 
-### [MergeSort](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_1)<br>
+### [MergeSort](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Course_1/Week_2)<br>
 Print the number of inversions present in a given array of arbitrary size and order. To ensure a fast run time (namely O(nlogn), MergeSort is employed.<br>
 Note that an inversion is where two consecutive integers, i and j, exist in an array such that i > j when the list should be non-decreasing.<br>
 See Module_2_Assignment.py<br>
@@ -39,7 +39,7 @@ See Module_2_Assignment.py<br>
 - Usage of global variable to count number of inverses.<br>
 - Reading data from a file.<br>
 
-### [Optimised QuickSort](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_1)<br>
+### [Optimised QuickSort](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Course_1/Week_3)<br>
 QuickSort, where the pivot is chosen as the median of three elements (the first, middle, and last element in an array).<br>
 Counts number of comparisons made between elements in an array.<br>
 The aim of choosing the median of three elements increases the chance of an optimal 25-75 split (which is 'good enough for $O(nlogn)$').<br>
@@ -50,7 +50,7 @@ See Module_3_Assignment_Part_3.py<br>
 - Usage of global variable to count number of comparisons.<br>
 - Reading data from a file.<br>
 
-### [Kosaraju's Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_2)<br>
+### [Kosaraju's Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Course_2/Week_1)<br>
 Kosaraju's Algorithm, used for finding the sizes of SCCS (strongly connected components) in a given graph.<br>
 Finds size of five largest SCCS, prints final answer.<br>
 See Module_1_Assignment.py<br>
@@ -61,7 +61,7 @@ See Module_1_Assignment.py<br>
 - Usage of `if __name__ == "__main__"` and main() function.<br>
 - Docstring usage.<br>
 
-### [Dijkstra's Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_2)<br>
+### [Dijkstra's Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Course_2/Week_2)<br>
 Dijkstra's Algorithm, used for finding the shortest paths from a starting node to all other connected nodes in a graph.<br>
 Finds and prints the shortest path from the start node (1) to ten other nodes (7,37,59,82,99,115,133,165,188,197).<br>
 See Module_2_Assignment.py<br>
@@ -70,7 +70,7 @@ See Module_2_Assignment.py<br>
 - Dictionary usage - to implement 'look-ups' in $O(1)$ time instead of $O(n)$ time.<br>
 - Modified DFS - to check for connected nodes, so unconnected nodes can be ignored.<br>
 
-### [Prim's MST Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_3)<br>
+### [Prim's MST Algorithm](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Course_3/Week_1)<br>
 Prim's minimum spanning tree (MST) algorithm, used for finding the minimum cost spanning tree in a graph.<br>
 Finds and prints the overall cost of the MST.<br>
 See Module_1_Assignment_Part_3.py<br>
@@ -78,7 +78,7 @@ See Module_1_Assignment_Part_3.py<br>
 - Prim's Algorithm - to find the cost of the MST in a graph.<br>
 - Dictionary usage - to implement 'look-ups' in $O(1)$ time instead of $O(n)$ time.<br>
 
-### [Knapsack Problem](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Part_3)<br>
+### [Knapsack Problem](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Course_3/Week_4)<br>
 Dynamic programming algorithm used to find an optimal solution to the Knapsack Problem.<br>
 Finds and prints the overall value of the optimum knapsack.<br>
 See Module_4_Assignment_Part_1.py
