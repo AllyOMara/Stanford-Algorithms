@@ -157,12 +157,12 @@ def shortest_shortest_path():
     FILE_NAME_1 = "g1.txt"
     FILE_NAME_2 = "g2.txt"
     FILE_NAME_3 = "g3.txt"
-    # edge_weights_1 = get_edge_weights(FILE_NAME_1)
-    # number_of_nodes_1 = get_number_of_nodes(FILE_NAME_1)
-    # graph_1 = get_graph(FILE_NAME_1, number_of_nodes_1)
-    # shortest_paths_array_1 = create_shortest_paths_array(number_of_nodes_1, graph_1, edge_weights_1)
-    # answer_1 = floyd_warshall(edge_weights_1, number_of_nodes_1, shortest_paths_array_1, graph_1)
-    # print(answer_1)
+    edge_weights_1 = get_edge_weights(FILE_NAME_1)
+    number_of_nodes_1 = get_number_of_nodes(FILE_NAME_1)
+    graph_1 = get_graph(FILE_NAME_1, number_of_nodes_1)
+    shortest_paths_array_1 = create_shortest_paths_array(number_of_nodes_1, graph_1, edge_weights_1)
+    answer_1 = floyd_warshall(edge_weights_1, number_of_nodes_1, shortest_paths_array_1, graph_1)
+    print(answer_1)
 
     edge_weights_2 = get_edge_weights(FILE_NAME_2)
     number_of_nodes_2 = get_number_of_nodes(FILE_NAME_2)
