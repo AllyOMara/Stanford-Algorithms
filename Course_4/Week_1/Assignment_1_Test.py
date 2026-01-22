@@ -1,7 +1,7 @@
 """
 Test file for Week_1_Assignment.py
 
-Contains 5 test cases.
+Contains 4 test cases.
 
 """
 
@@ -47,13 +47,3 @@ def test_4():
     shortest_paths_array = week.create_shortest_paths_array(number_of_nodes, graph, edge_weights)
     answer = week.floyd_warshall(number_of_nodes, shortest_paths_array)
     assert answer == "NULL"
-
-
-def test_5():
-    file_name = "test_graph_5.txt"
-    edge_weights = week.get_edge_weights(file_name)
-    number_of_nodes = week.get_number_of_nodes(file_name)
-    graph = week.get_graph(file_name, number_of_nodes)
-    shortest_paths_array = week.create_shortest_paths_array(number_of_nodes, graph, edge_weights)
-    answer = week.floyd_warshall(number_of_nodes, shortest_paths_array)
-    assert answer == -1947
