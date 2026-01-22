@@ -1,7 +1,7 @@
 # Course 1
 
 ## Overview
-Part 1 of Algorithms Specialization. Divide and Conquer, Sorting and Searching, and Randomized Algorithms.<br><br>
+Course 1 of Algorithms Specialization. Divide and Conquer, Sorting and Searching, and Randomized Algorithms.<br><br>
 
 ## Solutions
 ### [Week 1 - Karatsuba Multiplication](https://github.com/AllyOMara/Stanford-Algorithms/tree/main/Course_1/Week_1)
