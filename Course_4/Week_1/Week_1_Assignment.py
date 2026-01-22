@@ -103,7 +103,7 @@ def create_shortest_paths_array(number_of_nodes, graph, edge_weights):
     * when i = j, array[i][j][0] = 0
     * when edge i-j does not exist, array[i][j][0] = None
     * When edge i-j does exist, array[i][j][0] = weight of i-j edge
-        
+
     Arguments:
         number_of_nodes: (Integer) Total number of nodes present in the graph.
         graph: (Adjacency list) The given graph without edge weights.
@@ -130,7 +130,7 @@ def create_shortest_paths_array(number_of_nodes, graph, edge_weights):
                     else:
                         shortest_paths_array[i][j].append(weight)
                 else:
-                    shortest_paths_array[i][j].append(None)            
+                    shortest_paths_array[i][j].append(None)
     return shortest_paths_array
 
 
@@ -182,6 +182,7 @@ def floyd_warshall(number_of_nodes, shortest_paths_array):
 def find_shortest_shortest_path():
     """ Algorithm used to find the shortest shortest path.
     """
+
     FILE_NAME_1 = "g1.txt"
     FILE_NAME_2 = "g2.txt"
     FILE_NAME_3 = "g3.txt"
