@@ -13,19 +13,25 @@ three graphs have the structure:
 [first_vertex] [second_vertex] [edge_length]
 ...
 
-Your task is to compute the "shortest shortest path". Precisely, you must first
-identify which, if any, of the three graphs have no negative cycles.
+Your task is to compute the "shortest shortest path".
 
-For each such graph, you should compute all-pairs shortest paths and remember
-the smallest one.
+Precisely, you must first identify which, if any, of the three graphs have no
+negative cycles. For each such graph, you should compute all-pairs shortest
+paths and remember the smallest one.
 
 You can use whatever algorithm you like to solve this question.
+
+NOTE: Uses the Floyd-Warshall Algorithm.
 """
 
 
 def get_edge_weights(file_name):
-    """ Reads file to retrieve edge weights, which are put into a dictionary.
+    """ Gets edge weights from the given file, puts them into a dictionary.\n
     Dictionary structure: dictionary[node_one][node_two] = edge weight
+    Arguments:
+        file_name: (String) File name which contains details of the given graph. (See task details for file structure)
+    Returns:
+        (Dictionary) All edge weights in a dictionary with structure dict[parent][child] = weight.
     """
 
     weights = {}
@@ -48,6 +54,10 @@ def get_edge_weights(file_name):
 
 def get_number_of_nodes(file_name):
     """ Reads file and returns the number of nodes.
+    Arguments:
+        file_name: (String) File name which contains the number of nodes in the given graph. (See task details for file structure)
+    Returns:
+        (Integer) The total number of nodes in the given graph.
     """
 
     first_line = True
@@ -62,6 +72,11 @@ def get_number_of_nodes(file_name):
 
 def get_graph(file_name, number_of_nodes):
     """ Reads file to create adjacency list of all child nodes.
+    Arguments:
+        file_name: (String) File name which contains the given graph. (See task details for file structure)
+        number_of_nodes: (Integer) Total number of nodes in the given graph.
+    Returns:
+        (Adjacency list) The given graph without edge weights.
     """
 
     graph = []
@@ -82,8 +97,19 @@ def get_graph(file_name, number_of_nodes):
 
 
 def create_shortest_paths_array(number_of_nodes, graph, edge_weights):
-    """ Creates and returns a 3-Dimensional array.
-    number_of_nodes + 1 x number_of_nodes x number_of_nodes
+    """ Creates and returns a 3-Dimensional array.\n
+    Dimensions are: (number_of_nodes + 1) x (number_of_nodes + 1) x (number_of_nodes + 1)\n
+    Base cases:\n
+    * when i = j, array[i][j][0] = 0
+    * when edge i-j does not exist, array[i][j][0] = None
+    * When edge i-j does exist, array[i][j][0] = weight of i-j edge
+        
+    Arguments:
+        number_of_nodes: (Integer) Total number of nodes present in the graph.
+        graph: (Adjacency list) The given graph without edge weights.
+        edge_weights: (Dictionary) All edge weights in a dictionary with structure dict[parent][child] = weight.
+    Returns:
+        (3D Array) 3-Dimensional array with base cases accounted for.
     """
 
     shortest_paths_array = []
@@ -92,6 +118,7 @@ def create_shortest_paths_array(number_of_nodes, graph, edge_weights):
         for j in range(number_of_nodes + 1):
             shortest_paths_array[i].append([])
             for k in range(number_of_nodes + 1):
+                
                 # Base cases
                 if k == 0:
                     i_child_nodes = graph[i]
@@ -103,14 +130,19 @@ def create_shortest_paths_array(number_of_nodes, graph, edge_weights):
                         shortest_paths_array[i][j].append(k)
                     else:
                         shortest_paths_array[i][j].append(weight)
+                
                 else:
                     shortest_paths_array[i][j].append(None)            
     return shortest_paths_array
 
 
-def floyd_warshall(edge_weights, number_of_nodes, shortest_paths_array, graph):
-    """ Uses the Floyd-Warshall algorithm to compute all-pairs shortest paths.
-    Computes and returns shortest shortest path.
+def floyd_warshall(number_of_nodes, shortest_paths_array):
+    """ Uses the Floyd-Warshall algorithm to compute and return the shortest shortest path.
+    Arguments:
+        number_of_nodes: (Integer) Total number of nodes in the given graph.
+        shortest_paths_array: (3D Array) Array to keep track of all shortest paths from all source nodes.
+    Returns:
+        (Integer) Shortest shortest path in the graph.
     """
 
     shortest_path = 0
@@ -151,44 +183,41 @@ def floyd_warshall(edge_weights, number_of_nodes, shortest_paths_array, graph):
     return shortest_path
 
 
-def shortest_shortest_path():
+def find_shortest_shortest_path():
     """ Algorithm used to find the shortest shortest path.
     """
     FILE_NAME_1 = "g1.txt"
     FILE_NAME_2 = "g2.txt"
     FILE_NAME_3 = "g3.txt"
+
+    # First graph
     edge_weights_1 = get_edge_weights(FILE_NAME_1)
     number_of_nodes_1 = get_number_of_nodes(FILE_NAME_1)
     graph_1 = get_graph(FILE_NAME_1, number_of_nodes_1)
     shortest_paths_array_1 = create_shortest_paths_array(number_of_nodes_1, graph_1, edge_weights_1)
-    answer_1 = floyd_warshall(edge_weights_1, number_of_nodes_1, shortest_paths_array_1, graph_1)
+    answer_1 = floyd_warshall(number_of_nodes_1, shortest_paths_array_1)
     print(answer_1)
 
+    # Second graph
     edge_weights_2 = get_edge_weights(FILE_NAME_2)
     number_of_nodes_2 = get_number_of_nodes(FILE_NAME_2)
     graph_2 = get_graph(FILE_NAME_2, number_of_nodes_2)
     shortest_paths_array_2 = create_shortest_paths_array(number_of_nodes_2, graph_2, edge_weights_2)
-    answer_2 = floyd_warshall(edge_weights_2, number_of_nodes_2, shortest_paths_array_2, graph_2)
+    answer_2 = floyd_warshall(number_of_nodes_2, shortest_paths_array_2)
     print(answer_2)
 
+    # Third graph
     edge_weights_3 = get_edge_weights(FILE_NAME_3)
     number_of_nodes_3 = get_number_of_nodes(FILE_NAME_3)
     graph_3 = get_graph(FILE_NAME_3, number_of_nodes_3)
     shortest_paths_array_3 = create_shortest_paths_array(number_of_nodes_3, graph_3, edge_weights_3)
-    answer_3 = floyd_warshall(edge_weights_3, number_of_nodes_3, shortest_paths_array_3, graph_3)
+    answer_3 = floyd_warshall(number_of_nodes_3, shortest_paths_array_3)
     print(answer_3)
 
 
-shortest_shortest_path()
+def main():
+    find_shortest_shortest_path()
 
-"""
-TO DO:
-x. Fill out functions
 
-~~~
-
-Completed
-x. Make skeleton
-x. Make test cases
-
-"""
+if __name__ == "__main__":
+    main()
