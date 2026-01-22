@@ -87,12 +87,24 @@ def create_shortest_paths_array(number_of_nodes, graph, edge_weights):
     """
 
     shortest_paths_array = []
-    for i in range(number_of_nodes + 2):
+    for i in range(number_of_nodes + 1):
         shortest_paths_array.append([])
         for j in range(number_of_nodes + 1):
             shortest_paths_array[i].append([])
             for k in range(number_of_nodes + 1):
-                shortest_paths_array[i][j].append(None)
+                # Base cases
+                if k == 0:
+                    i_child_nodes = graph[i]
+                    if j in i_child_nodes:
+                        weight = edge_weights[i][j]
+                    else:
+                        weight = None
+                    if i == j:
+                        shortest_paths_array[i][j].append(k)
+                    else:
+                        shortest_paths_array[i][j].append(weight)
+                else:
+                    shortest_paths_array[i][j].append(None)            
     return shortest_paths_array
 
 
@@ -103,19 +115,6 @@ def floyd_warshall(edge_weights, number_of_nodes, shortest_paths_array, graph):
 
     shortest_path = 0
 
-    # Base case
-    for i in range(number_of_nodes + 1):
-        for j in range(number_of_nodes + 1):
-            i_child_nodes = graph[i]
-            if j in i_child_nodes:
-                weight = edge_weights[i][j]
-            else:
-                weight = None
-            if i == j:
-                shortest_paths_array[i][j][0] = 0
-            else:
-                shortest_paths_array[i][j][0] = weight
-
     # Solving subproblems
     for k in range(1, number_of_nodes + 1):
         for i in range(1, number_of_nodes + 1):
@@ -123,7 +122,6 @@ def floyd_warshall(edge_weights, number_of_nodes, shortest_paths_array, graph):
                 case_1 = shortest_paths_array[i][j][k - 1]
                 case_2_part_1 = shortest_paths_array[i][k][k - 1]
                 case_2_part_2 = shortest_paths_array[k][j][k - 1]
-
                 if (case_2_part_1 == None) or (case_2_part_2 == None):
                     case_2 = None
                 else:
@@ -139,7 +137,6 @@ def floyd_warshall(edge_weights, number_of_nodes, shortest_paths_array, graph):
                     path_length = min(case_1, case_2)
 
                 shortest_paths_array[i][j][k] = path_length
-
                 if path_length != None:
                     if path_length < shortest_path:
                         shortest_path = path_length
@@ -157,7 +154,32 @@ def floyd_warshall(edge_weights, number_of_nodes, shortest_paths_array, graph):
 def shortest_shortest_path():
     """ Algorithm used to find the shortest shortest path.
     """
+    FILE_NAME_1 = "g1.txt"
+    FILE_NAME_2 = "g2.txt"
+    FILE_NAME_3 = "g3.txt"
+    # edge_weights_1 = get_edge_weights(FILE_NAME_1)
+    # number_of_nodes_1 = get_number_of_nodes(FILE_NAME_1)
+    # graph_1 = get_graph(FILE_NAME_1, number_of_nodes_1)
+    # shortest_paths_array_1 = create_shortest_paths_array(number_of_nodes_1, graph_1, edge_weights_1)
+    # answer_1 = floyd_warshall(edge_weights_1, number_of_nodes_1, shortest_paths_array_1, graph_1)
+    # print(answer_1)
 
+    edge_weights_2 = get_edge_weights(FILE_NAME_2)
+    number_of_nodes_2 = get_number_of_nodes(FILE_NAME_2)
+    graph_2 = get_graph(FILE_NAME_2, number_of_nodes_2)
+    shortest_paths_array_2 = create_shortest_paths_array(number_of_nodes_2, graph_2, edge_weights_2)
+    answer_2 = floyd_warshall(edge_weights_2, number_of_nodes_2, shortest_paths_array_2, graph_2)
+    print(answer_2)
+
+    edge_weights_3 = get_edge_weights(FILE_NAME_3)
+    number_of_nodes_3 = get_number_of_nodes(FILE_NAME_3)
+    graph_3 = get_graph(FILE_NAME_3, number_of_nodes_3)
+    shortest_paths_array_3 = create_shortest_paths_array(number_of_nodes_3, graph_3, edge_weights_3)
+    answer_3 = floyd_warshall(edge_weights_3, number_of_nodes_3, shortest_paths_array_3, graph_3)
+    print(answer_3)
+
+
+shortest_shortest_path()
 
 """
 TO DO:
