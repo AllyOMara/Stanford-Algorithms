@@ -10,25 +10,21 @@ import Week_1_Assignment as week
 
 
 def test_1():
-    file_name = "test_graph_1.txt"
-    answer = week.find_shortest_shortest_path(file_name)
+    answer = week.find_shortest_shortest_path("test_graph_1.txt")
     assert answer == -41
 
 
 def test_2():
-    file_name = "test_graph_2.txt"
-    answer = week.find_shortest_shortest_path(file_name)
+    answer = week.find_shortest_shortest_path("test_graph_2.txt")
 
     assert answer == -208
 
 
 def test_3():
-    file_name = "test_graph_3.txt"
-    answer = week.find_shortest_shortest_path(file_name)
+    answer = week.find_shortest_shortest_path("test_graph_3.txt")
     assert answer == -431
 
 
 def test_4():
-    file_name = "test_graph_4.txt"
-    answer = week.find_shortest_shortest_path(file_name)
+    answer = week.find_shortest_shortest_path("test_graph_4.txt")
     assert answer == "NULL"
