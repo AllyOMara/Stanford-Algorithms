@@ -27,3 +27,33 @@ heuristic for this instance, rounded down to the nearest integer.
 
 NOTE: The distance between two cities is defined as the Euclidean distance.
 """
+
+
+def get_coordinates(file_name):
+    """ Uses file_name to get the x and y coordinates of all cities.
+    Returns two arrays: x coordinates and y coordinates where city 1's index is 1.
+    """
+
+
+def calculate_euclidean_square(x_1, x_2, y_1, y_2):
+    """ Uses x and y coordinates to find the euclidean square.
+    """
+
+
+def tsp_heuristic(file_name):
+    """ Uses the nearest neighbour heuristic to find the total cost of the tour.
+    """
+
+
+def calculate_tour_cost()
+
+
+
+"""
+TO DO:
+
+x. Create skeleton (outline)
+x. Create test cases
+x. Create shell script
+
+"""
