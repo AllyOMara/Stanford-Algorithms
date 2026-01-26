@@ -81,7 +81,6 @@ if __name__ == "__main__":
 """
 TO DO:
 
-x. Create test cases
 x. Create shell script
 
 """
