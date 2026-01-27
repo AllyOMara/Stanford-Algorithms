@@ -37,7 +37,12 @@ import math
 
 def get_maximum_city_index(file_name):
     """ Uses file_name to retrieve the number of cities.
+    Arguments:
+        file_name: (String) File name which contains details of the cities. (See task details for file structure)
+    Returns:
+        (Integer) Number of cities in the TSP instance.
     """
+
     with open(file_name) as file:
         for line in file:
             max_city_index = int((line.split())[0])
@@ -46,8 +51,15 @@ def get_maximum_city_index(file_name):
 
 def calculate_euclidean_square(x_1, x_2, y_1, y_2):
     """ Uses x and y coordinates to find the euclidean square.
+    Arguments:
+        x_1: (Float) First x coordinate
+        x_2: (Float) Second x coordinate
+        y_1: (Float) First y coordinate
+        y_2: (Float) Second y coordinate
+    Returns:
+        (Float) Euclidean square.
     """
-    
+
     squared_x = (x_1 - x_2) ** 2
     squared_y = (y_1 - y_2) ** 2
     euclidean_square = squared_x + squared_y
@@ -55,7 +67,11 @@ def calculate_euclidean_square(x_1, x_2, y_1, y_2):
 
 
 def create_visited_cities_list(max_cities):
-    """ Creates array to keep track of visited cities.
+    """ Creates array to track visited cities.
+    Arguments:
+        max_cities: (Integer) Number of cities in the TSP instance.
+    Returns:
+        (Array) containing max_cities numbers of False to track visited cities.
     """
 
     visited_list = [True]
@@ -65,10 +81,13 @@ def create_visited_cities_list(max_cities):
 
 
 def get_city_coordinates(file_name):
-    """ Uses file_name to get all x and y coordinates of all cities.
-    Returns 2 arrays: x coordinates and y coordinates.
+    """ Uses file_name to get x and y coordinates of all cities.
+    Arguments:
+        file_name: (String) File name which contains details of the cities. (See task details for file structure)
+    Returns:
+        2 Arrays - x coordinates and y coordinates. City n's x or y coordinates is at index n.
     """
-    
+
     x_coords = [None]
     y_coords = [None]
     with open(file_name) as file:
@@ -82,12 +101,18 @@ def get_city_coordinates(file_name):
 
 def get_euclidean_squares(visited_list, x_coords, y_coords, max_cities):
     """ Uses the nearest neighbour heuristic to find the travel order of the tour.
-    Returns array of Euclidean squares.
 
     1. Start the tour at the first city.
     2. Repeatedly visit the closest city that the tour hasn't visited yet. In
        case of a tie, go to the closest city with the lowest index.
     3. Once every city has been visited exactly once, return to the first city.
+    Arguments:
+        visited_list: (Array) Tracks which cities have been visited.
+        x_coords: X coordinates of all cities.
+        y_coords: Y coordinates of all cities.
+        max_cities: Maximum number of cities.
+    Returns:
+        (Array) containing Euclidean squares (floats) to find total cost of TSP tour.
     """
 
     euclidean_squares = []
@@ -95,6 +120,7 @@ def get_euclidean_squares(visited_list, x_coords, y_coords, max_cities):
     visited_list[current_city] = True
 
     while False in visited_list:
+
         best_distance = 0
         best_city = None
         current_x = x_coords[current_city]
@@ -129,6 +155,10 @@ def get_euclidean_squares(visited_list, x_coords, y_coords, max_cities):
 
 def calculate_tour_cost(euclidean_squares):
     """ Uses tsp_tour to calculate the overall cost of the tour.
+    Arguments:
+        euclidean_squares: (Array) containing Euclidean squares (floats).
+    Returns:
+        (Integer) Final cost floored.
     """
 
     total_cost = 0
@@ -158,12 +188,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-"""
-TO DO:
-
-x. Fix shell script <-- Priority
-x. Fix docstrings
-
-"""
