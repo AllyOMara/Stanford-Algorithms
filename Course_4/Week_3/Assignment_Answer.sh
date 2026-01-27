@@ -4,7 +4,7 @@ if [ $passed_test -eq 0 ]
 then
 echo "Tests passed."
 echo "Collecting answer..."
-answer=(python Week_1_Assignment.py g1.txt)
+python Week_1_Assignment.py g1.txt
 echo "Answer collected."
 echo "The answer is $answer."
 else

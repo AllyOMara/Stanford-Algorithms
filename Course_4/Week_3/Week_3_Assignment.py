@@ -80,7 +80,6 @@ def get_city_coordinates(file_name):
     return x_coords, y_coords
 
 
-
 def get_euclidean_squares(visited_list, x_coords, y_coords, max_cities):
     """ Uses the nearest neighbour heuristic to find the travel order of the tour.
     Returns array of Euclidean squares.
@@ -149,7 +148,7 @@ def tsp_heuristic(file_name):
     x_coords, y_coords = get_city_coordinates(file_name)
     euclidean_squares = get_euclidean_squares(visited_list, x_coords, y_coords, max_cities)
     total_cost = calculate_tour_cost(euclidean_squares)
-    print(total_cost)
+    return total_cost
 
 
 def main():
@@ -164,6 +163,7 @@ if __name__ == "__main__":
 """
 TO DO:
 
-x. Create shell script
+x. Fix shell script <-- Priority
+x. Fix docstrings
 
 """
