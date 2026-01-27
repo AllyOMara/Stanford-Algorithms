@@ -38,7 +38,7 @@ import math
 def get_maximum_city_index(file_name):
     """ Uses file_name to retrieve the number of cities.
     Arguments:
-        file_name: (String) File name which contains details of the cities. (See task details for file structure)
+        file_name: (String) Name of file containing details of the cities. (See task details for file structure)
     Returns:
         (Integer) Number of cities in the TSP instance.
     """
@@ -83,7 +83,7 @@ def create_visited_cities_list(max_cities):
 def get_city_coordinates(file_name):
     """ Uses file_name to get x and y coordinates of all cities.
     Arguments:
-        file_name: (String) File name which contains details of the cities. (See task details for file structure)
+        file_name: (String) Name of file containing details of the cities. (See task details for file structure)
     Returns:
         2 Arrays - x coordinates and y coordinates. City n's x or y coordinates is at index n.
     """
@@ -100,12 +100,7 @@ def get_city_coordinates(file_name):
 
 
 def get_euclidean_squares(visited_list, x_coords, y_coords, max_cities):
-    """ Uses the nearest neighbour heuristic to find the travel order of the tour.
-
-    1. Start the tour at the first city.
-    2. Repeatedly visit the closest city that the tour hasn't visited yet. In
-       case of a tie, go to the closest city with the lowest index.
-    3. Once every city has been visited exactly once, return to the first city.
+    """ Uses the nearest neighbour heuristic to find the travel order.
     Arguments:
         visited_list: (Array) Tracks which cities have been visited.
         x_coords: X coordinates of all cities.
@@ -171,6 +166,10 @@ def calculate_tour_cost(euclidean_squares):
 
 def tsp_heuristic(file_name):
     """ Algorithm used to find the overall cost of a TSP tour.
+    Arguments:
+        file_name: (String) Name of file containing details of the cities. (See task details for file structure)
+    Returns:
+        (Integer) Total cost of the TSP tour, floored.
     """
     
     max_cities = get_maximum_city_index(file_name)
@@ -178,6 +177,7 @@ def tsp_heuristic(file_name):
     x_coords, y_coords = get_city_coordinates(file_name)
     euclidean_squares = get_euclidean_squares(visited_list, x_coords, y_coords, max_cities)
     total_cost = calculate_tour_cost(euclidean_squares)
+    print(total_cost)
     return total_cost
 
 
